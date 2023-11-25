@@ -2,7 +2,7 @@
     <application
         android:label="tabnews"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -30,4 +30,8 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    <meta-data
+        android:name="io.flutter.embedding.android.EnableImpeller"
+        android:value="true" />
+
 </manifest>
