@@ -2,9 +2,9 @@ name: tabnews
 description: A new Flutter project.
 
 publish_to: "none"
-repository: https://github.com/softyesti/tabnews
+repository: https://github.com/softyesti/tabnews_client
 
-version: 0.0.1
+version: 0.0.1+1
 
 environment:
   sdk: ">=3.1.5 <4.0.0"
@@ -16,15 +16,16 @@ dependencies:
   cupertino_icons: ^1.0.2
   dio: ^5.3.4
   dart_mappable: ^4.0.1
-  softuiux: ^0.0.1-dev
   get: ^4.6.6
   ionicons: ^0.2.2
+  google_fonts: ^6.1.0
+  flutter_markdown: ^0.6.20+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
   very_good_analysis: ^5.1.0
   dart_mappable_builder: ^4.0.1
   build_runner: ^2.4.6

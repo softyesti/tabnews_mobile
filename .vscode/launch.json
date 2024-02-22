@@ -8,27 +8,53 @@
       "name": "tabnews",
       "request": "launch",
       "type": "dart",
-      "args": ["--enable-impeller"]
-    },
-    {
-      "name": "tabnews (no impeller)",
-      "request": "launch",
-      "type": "dart",
-      "args": ["--no-enable-impeller"]
+      "args": [
+        "--enable-impeller"
+      ]
     },
     {
       "name": "tabnews (profile mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile",
-      "args": ["--enable-impeller"]
+      "args": [
+        "--enable-impeller"
+      ]
     },
     {
       "name": "tabnews (release mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release",
-      "args": ["--enable-impeller"]
+      "args": [
+        "--enable-impeller"
+      ]
+    },
+    {
+      "name": "tabnews (no impeller)",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "--no-enable-impeller"
+      ]
+    },
+    {
+      "name": "tabnews (profile mode) (no impeller)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile",
+      "args": [
+        "--no-enable-impeller"
+      ]
+    },
+    {
+      "name": "tabnews (release mode) (no impeller)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+      "args": [
+        "--no-enable-impeller"
+      ]
     }
   ]
 }
