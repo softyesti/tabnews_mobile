@@ -4,11 +4,19 @@
     "bools",
     "chatbubble",
     "cupertino",
+    "datasource",
+    "Datasource",
+    "Getx",
     "ionicons",
     "lerp",
     "pubspec",
     "softuiux",
-    "tabnews"
+    "tabcoins",
+    "tabnews",
+    "usecase",
+    "Usecase",
+    "usecases"
   ],
-  "java.compile.nullAnalysis.mode": "automatic"
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.configuration.updateBuildConfiguration": "automatic"
 }

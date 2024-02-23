@@ -14,12 +14,14 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  dio: ^5.3.4
+  dio: ^5.4.1
   dart_mappable: ^4.0.1
   get: ^4.6.6
   ionicons: ^0.2.2
   google_fonts: ^6.1.0
   flutter_markdown: ^0.6.20+1
+  url_launcher: ^6.2.5
+  markdown: ^7.2.1
 
 dev_dependencies:
   flutter_test:
@@ -30,6 +32,7 @@ dev_dependencies:
   dart_mappable_builder: ^4.0.1
   build_runner: ^2.4.6
   flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.13
 
 flutter:
   uses-material-design: true
@@ -48,5 +51,13 @@ flutter_launcher_icons:
   web:
     generate: true
     image_path: "assets/icon.png"
-    background_color: "#24292F"
-    theme_color: "#24292F"
+    background_color: "#0D1117"
+    theme_color: "#0D1117"
+
+flutter_native_splash:
+  color: "#0D1117"
+  android: true
+  ios: true
+  web: true
+  android_12:
+    branding: assets/branding.png
