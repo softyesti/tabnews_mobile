@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:markdown/markdown.dart' as md;
+import 'package:url_launcher/url_launcher_string.dart';
 
 class MarkdownWidget extends StatelessWidget {
   const MarkdownWidget({
@@ -15,11 +17,22 @@ class MarkdownWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Markdown(
       data: data,
-      selectable: true,
-      padding: EdgeInsets.zero,
       controller: scrollController,
-      physics: const NeverScrollableScrollPhysics(),
+      selectable: true,
       shrinkWrap: true,
+      padding: EdgeInsets.zero,
+      physics: const NeverScrollableScrollPhysics(),
+      softLineBreak: true,
+      extensionSet: md.ExtensionSet(
+        md.ExtensionSet.gitHubFlavored.blockSyntaxes,
+        <md.InlineSyntax>[
+          md.EmojiSyntax(),
+          ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes,
+        ],
+      ),
+      onTapLink: (text, href, title) async {
+        if (href != null) await launchUrlString(href);
+      },
     );
   }
 }
