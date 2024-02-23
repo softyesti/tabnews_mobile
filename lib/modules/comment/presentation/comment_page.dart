@@ -3,11 +3,12 @@ import 'package:get/get.dart';
 import 'package:tabnews/core/mixin/theme_mixin.dart';
 import 'package:tabnews/core/routes/app_routes.dart';
 import 'package:tabnews/core/widgets/appbar_widget.dart';
-import 'package:tabnews/core/widgets/cards/comment_card_widget.dart';
-import 'package:tabnews/core/widgets/cards/detail_card_widget.dart';
+import 'package:tabnews/core/widgets/cards/detailed_news_card_widget.dart';
+import 'package:tabnews/core/widgets/cards/news_comment_card_widget.dart';
 import 'package:tabnews/core/widgets/page_widget.dart';
 import 'package:tabnews/core/widgets/spacer_widget.dart';
 import 'package:tabnews/core/widgets/text_widget.dart';
+import 'package:tabnews/modules/comment/presentation/comment_page_controller.dart';
 
 class CommentPage extends StatefulWidget {
   const CommentPage({super.key});
@@ -34,12 +35,7 @@ class _CommentPageState extends State<CommentPage> with ThemeMixin {
 
   @override
   Widget build(BuildContext context) {
-    void onPressed() {
-      Get.toNamed<void>(
-        AppRoutes.comment,
-        preventDuplicates: false,
-      );
-    }
+    final controller = Get.find<CommentPageController>();
 
     return PageWidget.sliver(
       scrollController: scrollController,
@@ -48,11 +44,15 @@ class _CommentPageState extends State<CommentPage> with ThemeMixin {
         scrollController: scrollController,
       ),
       slivers: [
-        SliverToBoxAdapter(child: DetailCardWidget(key: detailKey)),
+        SliverToBoxAdapter(
+          child: DetailedNewsCardWidget(key: detailKey, news: controller.news),
+        ),
         const SliverToBoxAdapter(
           child: SpacerWidget(size: SpacerWidgetSizes.large),
         ),
-        const SliverToBoxAdapter(child: CommentCardWidget()),
+        SliverToBoxAdapter(
+          child: NewsCommentCardWidget(comment: controller.comment),
+        ),
         const SliverToBoxAdapter(
           child: SpacerWidget(size: SpacerWidgetSizes.large),
         ),
@@ -61,12 +61,24 @@ class _CommentPageState extends State<CommentPage> with ThemeMixin {
         ),
         const SliverToBoxAdapter(child: SpacerWidget()),
         SliverList.separated(
-          itemCount: 10,
+          itemCount: controller.comment.comments.length,
           separatorBuilder: (_, __) => const SpacerWidget(),
-          itemBuilder: (_, __) => CommentCardWidget(
-            onPressed: onPressed,
-            onCommentPressed: onPressed,
-          ),
+          itemBuilder: (_, index) {
+            final comment = controller.comment.comments[index];
+
+            void onPressed() {
+              Get.toNamed<void>(
+                AppRoutes.comment,
+                preventDuplicates: false,
+              );
+            }
+
+            return NewsCommentCardWidget(
+              comment: comment,
+              onPressed: onPressed,
+              onCommentPressed: onPressed,
+            );
+          },
         ),
       ],
     );

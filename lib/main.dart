@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:tabnews/core/bindings/initial_binding.dart';
 import 'package:tabnews/core/routes/app_pages.dart';
 import 'package:tabnews/core/routes/app_routes.dart';
 import 'package:tabnews/core/theme/app_theme.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'TabNews',
+      initialBinding: InitialBinding(),
       initialRoute: AppRoutes.initial,
       getPages: AppPages.pages,
       theme: AppTheme.get(isDark: false),

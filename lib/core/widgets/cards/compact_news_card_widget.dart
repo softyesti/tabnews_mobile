@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:tabnews/core/domain/entities/compact_news_entity.dart';
 import 'package:tabnews/core/mixin/theme_mixin.dart';
 import 'package:tabnews/core/widgets/button/icon_button_widget.dart';
 import 'package:tabnews/core/widgets/card_widget.dart';
@@ -7,10 +8,9 @@ import 'package:tabnews/core/widgets/spacer_widget.dart';
 import 'package:tabnews/core/widgets/text_widget.dart';
 import 'package:tabnews/core/widgets/touchable_widget.dart';
 
-class NewsCardWidget extends StatelessWidget {
-  const NewsCardWidget({
-    required this.title,
-    required this.summary,
+class CompactNewsCardWidget extends StatelessWidget {
+  const CompactNewsCardWidget({
+    required this.news,
     this.onPressed,
     this.onCommentPressed,
     this.onUpperPressed,
@@ -18,8 +18,7 @@ class NewsCardWidget extends StatelessWidget {
     super.key,
   });
 
-  final String title;
-  final String summary;
+  final CompactNewsEntity news;
   final void Function()? onPressed;
   final void Function()? onCommentPressed;
   final void Function()? onUpperPressed;
@@ -37,12 +36,19 @@ class NewsCardWidget extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _TitleWidget(title: title),
-                _SummaryWidget(summary: summary),
+                Row(
+                  children: [
+                    TextWidget(news.ownerUsername),
+                    const TextWidget(' • '),
+                    TextWidget(news.publishedAt),
+                  ],
+                ),
+                TextWidget(news.title, size: TextWidgetSizes.titleLarge),
               ],
             ),
             const SpacerWidget(),
             _ActionsWidget(
+              news: news,
               onCommentPressed: onCommentPressed,
               onUpperPressed: onUpperPressed,
               onDownPressed: onDownPressed,
@@ -54,41 +60,15 @@ class NewsCardWidget extends StatelessWidget {
   }
 }
 
-class _TitleWidget extends StatelessWidget {
-  const _TitleWidget({required this.title});
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextWidget(
-      title,
-      size: TextWidgetSizes.titleLarge,
-    );
-  }
-}
-
-class _SummaryWidget extends StatelessWidget {
-  const _SummaryWidget({required this.summary});
-
-  final String summary;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextWidget(
-      summary,
-      maxLines: 2,
-    );
-  }
-}
-
 class _ActionsWidget extends StatelessWidget with ThemeMixin {
   const _ActionsWidget({
+    required this.news,
     required this.onUpperPressed,
     required this.onDownPressed,
     required this.onCommentPressed,
   });
 
+  final CompactNewsEntity news;
   final void Function()? onUpperPressed;
   final void Function()? onDownPressed;
   final void Function()? onCommentPressed;
@@ -103,14 +83,17 @@ class _ActionsWidget extends StatelessWidget with ThemeMixin {
       children: [
         IconButtonWidget(
           icon: Ionicons.arrow_up_outline,
+          label: news.tabcoinsCredit.toString(),
           onPressed: onUpperPressed,
         ),
         IconButtonWidget(
           icon: Ionicons.arrow_down_outline,
+          label: news.tabcoinsDebit.toString(),
           onPressed: onDownPressed,
         ),
         IconButtonWidget(
           icon: Ionicons.chatbubble_outline,
+          label: news.commentCount.toString(),
           onPressed: onCommentPressed,
         ),
       ],
