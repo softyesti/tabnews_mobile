@@ -1,16 +1,37 @@
-# tabnews
+# bNews Client
 
-A new Flutter project.
+Cliente mobile construído em Flutter para visualizar e interagir com as notícias/artigos publicados no [TabNews](https://tabnews.com.br).
 
-## Getting Started
+## Tecnologias
 
-This project is a starting point for a Flutter application.
+* Flutter
+* Dart
+* Make
 
-A few resources to get you started if this is your first Flutter project:
+Veja as dependências do projeto em: [pubspec.yaml](https://github.com/softyesti/tabnews_client/blob/main/pubspec.yaml)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Plataformas
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Android 4.4+
+* IOS 12+
+* Web(interface mobile)
+
+## TabNews API
+
+Esta aplicação se baseia na versão v1 da api, disponível através da rota: [https://tabnews.com.br/v1](https://tabnews.com.br/v1) e descrita na documentação não oficial: [https://coffee-is-power.github.io/tabnews-openapi/](https://coffee-is-power.github.io/tabnews-openapi/)
+
+## Imagens
+
+<table>
+  <tr>
+    <td>
+      <img src="image/README/1708720899583.png" alt="" width="200px" />
+    </td>
+    <td>
+      <img src="image/README/1708720957346.png" alt="" width="200px" />
+    </td>
+    <td>
+      <img src="image/README/1708720962973.png" alt="" width="200px" />
+    </td>
+  </tr>
+</table>
