@@ -1,4 +1,4 @@
-# bNews Client
+# TabNews Client
 
 Cliente mobile construído em Flutter para visualizar e interagir com as notícias/artigos publicados no [TabNews](https://tabnews.com.br).
 
