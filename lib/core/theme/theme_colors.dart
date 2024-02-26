@@ -41,7 +41,7 @@ final class ThemeDarkColors extends ThemeColors {
     super.onWarning = const Color(0xFF000000),
     super.danger = const Color(0xFF000000),
     super.onDanger = const Color(0xFF000000),
-    super.surface = const Color(0xFF0D1117),
+    super.surface = const Color.fromRGBO(13, 17, 23, 0.8),
     super.surfaceTint = const Color(0xFF0D1117),
     super.onSurface = const Color(0xFFF2F2F2),
     super.border = const Color(0xFF212121),

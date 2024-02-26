@@ -46,18 +46,23 @@ class PageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      extendBody: true,
-      resizeToAvoidBottomInset: false,
-      appBar: appBar != null
-          ? PreferredSize(preferredSize: appBarSize, child: appBar!)
-          : null,
-      body: PaddingWidget(
-        child: body ?? child ?? const SizedBox(),
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
-      floatingActionButton: floatingActionButton,
-      bottomNavigationBar: bottomNavigationBar,
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        resizeToAvoidBottomInset: false,
+        appBar: appBar != null
+            ? PreferredSize(preferredSize: appBarSize, child: appBar!)
+            : null,
+        body: PaddingWidget(
+          child: body ?? child ?? const SizedBox(),
+        ),
+        floatingActionButton: floatingActionButton,
+        bottomNavigationBar: bottomNavigationBar,
+      ),
     );
   }
 }

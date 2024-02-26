@@ -5,12 +5,16 @@ import 'package:tabnews/core/widgets/padding_widget.dart';
 class CardWidget extends StatelessWidget with ThemeMixin {
   const CardWidget({
     required this.child,
-    this.size,
+    this.padding,
+    this.borderRadius,
+    this.color,
     super.key,
   });
 
   final Widget child;
-  final Size? size;
+  final EdgeInsets? padding;
+  final BorderRadius? borderRadius;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +22,18 @@ class CardWidget extends StatelessWidget with ThemeMixin {
     final metrics = getMetrics();
 
     return Card(
-      color: colors.surface,
+      color: color ?? colors.surface,
       surfaceTintColor: colors.surfaceTint,
       shadowColor: colors.shadow,
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(metrics.radius),
+        borderRadius: borderRadius ?? BorderRadius.all(metrics.radius),
         side: metrics.border,
       ),
-      child: PaddingWidget(child: child),
+      child: PaddingWidget(
+        padding: padding,
+        child: child,
+      ),
     );
   }
 }

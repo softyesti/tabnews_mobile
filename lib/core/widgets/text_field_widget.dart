@@ -22,6 +22,8 @@ class TextFieldWidget extends StatelessWidget with ThemeMixin {
 
     return TextFormField(
       style: theme.textTheme.bodyMedium,
+      keyboardType: TextInputType.text,
+      maxLines: null,
       decoration: InputDecoration(
         filled: true,
         isDense: true,

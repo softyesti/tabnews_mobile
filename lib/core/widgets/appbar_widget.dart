@@ -48,6 +48,7 @@ class _AppBarWidgetState extends State<AppBarWidget> with ThemeMixin {
 
   @override
   Widget build(BuildContext context) {
+    final colors = getColors();
     final metrics = getMetrics();
 
     final titleSpacing = -NavigationToolbar.kMiddleSpacing + metrics.medium;
@@ -55,9 +56,10 @@ class _AppBarWidgetState extends State<AppBarWidget> with ThemeMixin {
     return BlurWidget(
       isEnabled: isBlurEnabled,
       child: AppBar(
-        forceMaterialTransparency: true,
         automaticallyImplyLeading: false,
         centerTitle: false,
+        backgroundColor: colors.surface,
+        surfaceTintColor: colors.surface,
         titleSpacing: widget.showLeading ? titleSpacing : null,
         leading: widget.showLeading ? const _LeadingWidget() : null,
         title: widget.title != null

@@ -22,6 +22,7 @@ dependencies:
   flutter_markdown: ^0.6.20+1
   url_launcher: ^6.2.5
   markdown: ^7.2.1
+  feather_icons: ^1.2.0
 
 dev_dependencies:
   flutter_test:
