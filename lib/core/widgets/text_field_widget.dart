@@ -4,10 +4,20 @@ import 'package:tabnews/core/mixin/theme_mixin.dart';
 class TextFieldWidget extends StatelessWidget with ThemeMixin {
   const TextFieldWidget({
     required this.hintText,
+    this.keyboardType = TextInputType.multiline,
+    this.textAlignVertical = TextAlignVertical.center,
+    this.expands = false,
+    this.controller,
+    this.maxLines,
     super.key,
   });
 
   final String hintText;
+  final TextInputType keyboardType;
+  final TextAlignVertical textAlignVertical;
+  final bool expands;
+  final TextEditingController? controller;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +31,13 @@ class TextFieldWidget extends StatelessWidget with ThemeMixin {
     );
 
     return TextFormField(
+      controller: controller,
+      keyboardType: keyboardType,
+      keyboardAppearance: theme.brightness,
       style: theme.textTheme.bodyMedium,
-      keyboardType: TextInputType.text,
-      maxLines: null,
+      maxLines: maxLines,
+      expands: expands,
+      textAlignVertical: textAlignVertical,
       decoration: InputDecoration(
         filled: true,
         isDense: true,

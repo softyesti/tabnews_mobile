@@ -3,8 +3,8 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:url_launcher/url_launcher_string.dart';
 
-class MarkdownWidget extends StatelessWidget {
-  const MarkdownWidget({
+class MarkdownViewerWidget extends StatelessWidget {
+  const MarkdownViewerWidget({
     required this.data,
     this.scrollController,
     super.key,

@@ -5,6 +5,7 @@ import 'package:tabnews/core/widgets/padding_widget.dart';
 class CardWidget extends StatelessWidget with ThemeMixin {
   const CardWidget({
     required this.child,
+    this.height,
     this.padding,
     this.borderRadius,
     this.color,
@@ -12,6 +13,7 @@ class CardWidget extends StatelessWidget with ThemeMixin {
   });
 
   final Widget child;
+  final double? height;
   final EdgeInsets? padding;
   final BorderRadius? borderRadius;
   final Color? color;
@@ -21,18 +23,21 @@ class CardWidget extends StatelessWidget with ThemeMixin {
     final colors = getColors();
     final metrics = getMetrics();
 
-    return Card(
-      color: color ?? colors.surface,
-      surfaceTintColor: colors.surfaceTint,
-      shadowColor: colors.shadow,
-      margin: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(
-        borderRadius: borderRadius ?? BorderRadius.all(metrics.radius),
-        side: metrics.border,
-      ),
-      child: PaddingWidget(
-        padding: padding,
-        child: child,
+    return SizedBox(
+      height: height,
+      child: Card(
+        color: color ?? colors.surface,
+        surfaceTintColor: colors.surfaceTint,
+        shadowColor: colors.shadow,
+        margin: EdgeInsets.zero,
+        shape: RoundedRectangleBorder(
+          borderRadius: borderRadius ?? BorderRadius.all(metrics.radius),
+          side: metrics.border,
+        ),
+        child: PaddingWidget(
+          padding: padding,
+          child: child,
+        ),
       ),
     );
   }

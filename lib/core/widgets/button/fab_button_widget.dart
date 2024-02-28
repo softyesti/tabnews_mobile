@@ -14,12 +14,14 @@ class FabButtonWidget extends StatelessWidget with ThemeMixin {
 
   @override
   Widget build(BuildContext context) {
+    final colors = getColors();
     final metrics = getMetrics();
 
     return IconButtonWidget(
       icon: icon,
       isFilled: true,
       padding: EdgeInsets.all(metrics.large / 2),
+      color: colors.surfaceTint,
       onPressed: onPressed,
     );
   }

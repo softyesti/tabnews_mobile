@@ -3,7 +3,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:tabnews/core/domain/entities/news_comment_entity.dart';
 import 'package:tabnews/core/widgets/button/icon_button_widget.dart';
 import 'package:tabnews/core/widgets/card_widget.dart';
-import 'package:tabnews/core/widgets/markdown_widget.dart';
+import 'package:tabnews/core/widgets/markdown/markdown_viewer_widget.dart';
 import 'package:tabnews/core/widgets/spacer_widget.dart';
 import 'package:tabnews/core/widgets/text_widget.dart';
 import 'package:tabnews/core/widgets/touchable_widget.dart';
@@ -38,7 +38,7 @@ class NewsCommentCardWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MarkdownWidget(data: comment.body),
+                MarkdownViewerWidget(data: comment.body),
                 const SpacerWidget(),
                 _ActionsWidget(
                   comment: comment,

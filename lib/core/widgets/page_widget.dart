@@ -54,6 +54,7 @@ class PageWidget extends StatelessWidget {
         extendBodyBehindAppBar: true,
         extendBody: true,
         resizeToAvoidBottomInset: false,
+        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
         appBar: appBar != null
             ? PreferredSize(preferredSize: appBarSize, child: appBar!)
             : null,
