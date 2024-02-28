@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:tabnews/core/routes/app_routes.dart';
 import 'package:tabnews/core/widgets/appbar_widget.dart';
+import 'package:tabnews/core/widgets/button/fab_button_widget.dart';
 import 'package:tabnews/core/widgets/cards/compact_news_card_widget.dart';
 import 'package:tabnews/core/widgets/page_widget.dart';
 import 'package:tabnews/core/widgets/spacer_widget.dart';
@@ -29,6 +31,7 @@ class _ChildWidget extends GetView<RelevantPageController> {
     final scrollController = ScrollController();
 
     return PageWidget(
+      floatingActionButton: const FabButtonWidget(icon: Ionicons.add_outline),
       appBar: AppBarWidget(
         title: 'Relevantes',
         scrollController: scrollController,

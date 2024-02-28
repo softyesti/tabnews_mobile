@@ -4,16 +4,14 @@ import 'package:ionicons/ionicons.dart';
 import 'package:tabnews/core/mixin/theme_mixin.dart';
 import 'package:tabnews/core/routes/app_routes.dart';
 import 'package:tabnews/core/widgets/appbar_widget.dart';
-import 'package:tabnews/core/widgets/blur_widget.dart';
 import 'package:tabnews/core/widgets/button/fab_button_widget.dart';
-import 'package:tabnews/core/widgets/button/icon_button_widget.dart';
-import 'package:tabnews/core/widgets/card_widget.dart';
 import 'package:tabnews/core/widgets/cards/detailed_news_card_widget.dart';
 import 'package:tabnews/core/widgets/cards/news_comment_card_widget.dart';
 import 'package:tabnews/core/widgets/page_widget.dart';
 import 'package:tabnews/core/widgets/spacer_widget.dart';
-import 'package:tabnews/core/widgets/text_field_widget.dart';
 import 'package:tabnews/core/widgets/text_widget.dart';
+import 'package:tabnews/core/widgets/wrap_widget.dart';
+import 'package:tabnews/modules/comment/presentation/comment_dialog_widget.dart';
 import 'package:tabnews/modules/news/presentation/news_page_controller.dart';
 
 class NewsPage extends GetView<NewsPageController> {
@@ -45,7 +43,6 @@ class _ChildWidget extends StatelessWidget {
         repliesKey: repliesKey,
         scrollController: scrollController,
       ),
-      bottomNavigationBar: _BottomWidget(),
       slivers: [
         const _NewsWidget(),
         const SliverToBoxAdapter(
@@ -95,8 +92,8 @@ class _FabButtonsWidget extends StatelessWidget with ThemeMixin {
   Widget build(BuildContext context) {
     final metrics = getMetrics();
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
+    return WrapWidget(
+      spacing: WrapWidgetSpacings.small,
       children: [
         FabButtonWidget(
           icon: Ionicons.arrow_up_outline,
@@ -106,7 +103,6 @@ class _FabButtonsWidget extends StatelessWidget with ThemeMixin {
             curve: metrics.curve,
           ),
         ),
-        const SpacerWidget(size: SpacerWidgetSizes.small),
         FabButtonWidget(
           icon: Ionicons.arrow_down_outline,
           onPressed: () => Scrollable.ensureVisible(
@@ -115,71 +111,18 @@ class _FabButtonsWidget extends StatelessWidget with ThemeMixin {
             curve: metrics.curve,
           ),
         ),
-      ],
-    );
-  }
-}
-
-class _BottomWidget extends StatelessWidget with ThemeMixin {
-  @override
-  Widget build(BuildContext context) {
-    final metrics = getMetrics();
-    final insets = MediaQuery.of(context).viewInsets;
-
-    final borderRadius = BorderRadius.all(metrics.radius).copyWith(
-      bottomLeft: Radius.zero,
-      bottomRight: Radius.zero,
-    );
-
-    return BlurWidget(
-      borderRadius: borderRadius,
-      child: CardWidget(
-        borderRadius: borderRadius,
-        padding: EdgeInsets.all(metrics.medium).copyWith(
-          bottom: insets.bottom <= 24 ? 0 : metrics.medium,
-        ),
-        child: SafeArea(
-          top: false,
-          bottom: insets.bottom <= 24,
-          left: false,
-          right: false,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Flexible(
-                child: TextFieldWidget(
-                  hintText: 'Escreva um comentário',
-                ),
-              ),
-              Visibility(
-                visible: insets.bottom != 0,
-                child: const SpacerWidget(),
-              ),
-              Visibility(
-                visible: insets.bottom != 0,
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButtonWidget(icon: Icons.title_outlined),
-                    IconButtonWidget(icon: Icons.format_bold_outlined),
-                    IconButtonWidget(icon: Icons.format_italic_outlined),
-                    IconButtonWidget(icon: Icons.link_outlined),
-                    IconButtonWidget(icon: Icons.format_list_bulleted_outlined),
-                    IconButtonWidget(icon: Icons.format_list_numbered_outlined),
-                    IconButtonWidget(icon: Icons.format_quote_outlined),
-                    IconButtonWidget(icon: Icons.strikethrough_s_outlined),
-                    IconButtonWidget(icon: Icons.code_outlined),
-                    IconButtonWidget(icon: Icons.check_box_outlined),
-                    IconButtonWidget(icon: Icons.grid_on_outlined),
-                    IconButtonWidget(icon: Icons.image_outlined),
-                  ],
-                ),
-              ),
-            ],
+        FabButtonWidget(
+          icon: Ionicons.chatbubble_outline,
+          onPressed: () => Get.bottomSheet<void>(
+            const CommentDialogWidget(),
+            isScrollControlled: true,
+            ignoreSafeArea: false,
+            backgroundColor: Colors.transparent,
+            enterBottomSheetDuration: metrics.duration,
+            exitBottomSheetDuration: metrics.duration,
           ),
         ),
-      ),
+      ],
     );
   }
 }

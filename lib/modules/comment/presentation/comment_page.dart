@@ -8,7 +8,7 @@ import 'package:tabnews/core/widgets/cards/news_comment_card_widget.dart';
 import 'package:tabnews/core/widgets/page_widget.dart';
 import 'package:tabnews/core/widgets/spacer_widget.dart';
 import 'package:tabnews/core/widgets/text_widget.dart';
-import 'package:tabnews/modules/comment/presentation/comment_page_controller.dart';
+import 'package:tabnews/modules/comment/presentation/controllers/comment_page_controller.dart';
 
 class CommentPage extends StatefulWidget {
   const CommentPage({super.key});
