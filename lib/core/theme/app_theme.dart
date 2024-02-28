@@ -16,6 +16,7 @@ abstract class AppTheme {
       dividerColor: colors.border,
       extensions: [colors, metrics],
       iconTheme: IconThemeData(color: colors.text),
+      brightness: isDark ? Brightness.dark : Brightness.light,
       colorScheme: ColorScheme.fromSeed(
         seedColor: colors.primary,
         primary: colors.primary,

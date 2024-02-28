@@ -15,7 +15,10 @@ final class ThemeMetricsImpl extends ThemeMetrics {
     super.header = Size.zero,
     super.footer = Size.zero,
     super.button = Size.zero,
-    super.buttonPadding = EdgeInsets.zero,
+    super.buttonPadding = const EdgeInsets.symmetric(
+      vertical: 4,
+      horizontal: 8,
+    ),
     super.field = Size.zero,
     super.fieldPadding = const EdgeInsets.symmetric(
       vertical: 10,

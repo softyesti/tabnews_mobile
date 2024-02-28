@@ -29,7 +29,7 @@ final class ThemeLightColors extends ThemeColors {
 
 final class ThemeDarkColors extends ThemeColors {
   const ThemeDarkColors({
-    super.primary = const Color(0xFF161B22),
+    super.primary = const Color(0xFF3D80F7),
     super.onPrimary = const Color(0xFFF2F2F2),
     super.secondary = const Color(0xFF000000),
     super.onSecondary = const Color(0xFF000000),
@@ -42,9 +42,9 @@ final class ThemeDarkColors extends ThemeColors {
     super.danger = const Color(0xFF000000),
     super.onDanger = const Color(0xFF000000),
     super.surface = const Color.fromRGBO(13, 17, 23, 0.8),
-    super.surfaceTint = const Color(0xFF0D1117),
+    super.surfaceTint = const Color(0xFF21262D),
     super.onSurface = const Color(0xFFF2F2F2),
-    super.border = const Color(0xFF212121),
+    super.border = const Color(0xFF30363D),
     super.shadow = const Color(0xFF000000),
     super.text = const Color(0xFFF2F2F2),
     super.textAlt = const Color(0xFF000000),
