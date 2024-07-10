@@ -28,8 +28,6 @@ abstract class AppTheme {
         onError: colors.danger,
         outline: colors.border,
         shadow: colors.shadow,
-        background: colors.background,
-        onBackground: colors.onBackground,
       ),
       appBarTheme: AppBarTheme(
         shadowColor: colors.shadow,
