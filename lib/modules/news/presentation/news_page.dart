@@ -69,12 +69,9 @@ class _AppBarWidget extends GetView<NewsPageController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => AppBarWidget(
-        showLeading: true,
-        title: controller.news.value!.title,
-        scrollController: scrollController,
-      ),
+    return AppBarWidget(
+      showLeading: true,
+      scrollController: scrollController,
     );
   }
 }
