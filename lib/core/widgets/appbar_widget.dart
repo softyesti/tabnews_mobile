@@ -58,12 +58,16 @@ class _AppBarWidgetState extends State<AppBarWidget> with ThemeMixin {
       child: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: false,
-        backgroundColor: colors.surface,
-        surfaceTintColor: colors.surface,
+        backgroundColor: colors.secondary,
+        surfaceTintColor: colors.secondary,
         titleSpacing: widget.showLeading ? titleSpacing : null,
         leading: widget.showLeading ? const _LeadingWidget() : null,
         title: widget.title != null
-            ? TextWidget(widget.title!, size: TextWidgetSizes.headlineLarge)
+            ? TextWidget(
+                widget.title!,
+                color: colors.onSecondary,
+                size: TextWidgetSizes.headlineLarge,
+              )
             : null,
       ),
     );
@@ -75,6 +79,7 @@ class _LeadingWidget extends StatelessWidget with ThemeMixin {
 
   @override
   Widget build(Object context) {
+    final colors = getColors();
     final metrics = getMetrics();
 
     late IconData icon;
@@ -86,6 +91,7 @@ class _LeadingWidget extends StatelessWidget with ThemeMixin {
 
     return IconButtonWidget(
       icon: icon,
+      fgColor: colors.onSecondary,
       iconSize: metrics.icon * 1.4,
       onPressed: () => Get.back<void>(),
     );

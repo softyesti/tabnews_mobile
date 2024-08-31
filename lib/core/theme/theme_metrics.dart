@@ -28,13 +28,8 @@ final class ThemeMetricsImpl extends ThemeMetrics {
     super.duration = const Duration(milliseconds: 200),
   });
 
+  // ignore: avoid_unused_constructor_parameters
   factory ThemeMetricsImpl.get(ThemeColors colors) {
-    return ThemeMetricsImpl(
-      border: BorderSide(color: colors.border),
-      shadow: BoxShadow(
-        blurRadius: 16,
-        color: colors.shadow,
-      ),
-    );
+    return const ThemeMetricsImpl(border: BorderSide.none);
   }
 }

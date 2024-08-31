@@ -32,9 +32,9 @@ class MyApp extends StatelessWidget {
       initialBinding: InitialBinding(),
       initialRoute: AppRoutes.initial,
       getPages: AppPages.pages,
+      themeMode: ThemeMode.dark,
       theme: AppTheme.get(isDark: false),
       darkTheme: AppTheme.get(isDark: true),
-      themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
       locale: const Locale('pt', 'BR'),
       builder: (context, child) {

@@ -16,14 +16,11 @@ base class ThemeColors extends ThemeExtension<ThemeColors> {
     required this.danger,
     required this.onDanger,
     required this.surface,
-    required this.surfaceTint,
     required this.onSurface,
     required this.border,
-    required this.shadow,
     required this.text,
     required this.textAlt,
     required this.background,
-    required this.onBackground,
   });
 
   final Color primary;
@@ -39,14 +36,11 @@ base class ThemeColors extends ThemeExtension<ThemeColors> {
   final Color danger;
   final Color onDanger;
   final Color surface;
-  final Color surfaceTint;
   final Color onSurface;
   final Color border;
-  final Color shadow;
   final Color text;
   final Color textAlt;
   final Color background;
-  final Color onBackground;
 
   @override
   ThemeExtension<ThemeColors> copyWith({
@@ -63,14 +57,11 @@ base class ThemeColors extends ThemeExtension<ThemeColors> {
     Color? danger,
     Color? onDanger,
     Color? surface,
-    Color? surfaceTint,
     Color? onSurface,
     Color? border,
-    Color? shadow,
     Color? text,
     Color? textAlt,
     Color? background,
-    Color? onBackground,
   }) {
     return ThemeColors(
       primary: primary ?? this.primary,
@@ -86,14 +77,11 @@ base class ThemeColors extends ThemeExtension<ThemeColors> {
       danger: danger ?? this.danger,
       onDanger: onDanger ?? this.onDanger,
       surface: surface ?? this.surface,
-      surfaceTint: surfaceTint ?? this.surfaceTint,
       onSurface: onSurface ?? this.onSurface,
       border: border ?? this.border,
-      shadow: shadow ?? this.shadow,
       text: text ?? this.text,
       textAlt: textAlt ?? this.textAlt,
       background: background ?? this.background,
-      onBackground: onBackground ?? this.onBackground,
     );
   }
 
@@ -120,14 +108,11 @@ base class ThemeColors extends ThemeExtension<ThemeColors> {
       danger: Color.lerp(danger, other.danger, t)!,
       onDanger: Color.lerp(onDanger, other.onDanger, t)!,
       surface: Color.lerp(surface, other.surface, t)!,
-      surfaceTint: Color.lerp(surfaceTint, other.surfaceTint, t)!,
       onSurface: Color.lerp(onSurface, other.onSurface, t)!,
       border: Color.lerp(border, other.border, t)!,
-      shadow: Color.lerp(shadow, other.shadow, t)!,
       text: Color.lerp(text, other.text, t)!,
       textAlt: Color.lerp(textAlt, other.textAlt, t)!,
       background: Color.lerp(background, other.background, t)!,
-      onBackground: Color.lerp(onBackground, other.onBackground, t)!,
     );
   }
 }

@@ -26,10 +26,10 @@ class CardWidget extends StatelessWidget with ThemeMixin {
     return SizedBox(
       height: height,
       child: Card(
-        color: color ?? colors.surface,
-        surfaceTintColor: colors.surfaceTint,
-        shadowColor: colors.shadow,
+        elevation: 0,
         margin: EdgeInsets.zero,
+        color: color ?? colors.surface,
+        surfaceTintColor: colors.surface,
         shape: RoundedRectangleBorder(
           borderRadius: borderRadius ?? BorderRadius.all(metrics.radius),
           side: metrics.border,

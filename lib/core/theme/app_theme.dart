@@ -12,7 +12,6 @@ abstract class AppTheme {
     return theme.copyWith(
       scaffoldBackgroundColor: colors.background,
       cardColor: colors.surface,
-      shadowColor: colors.shadow,
       dividerColor: colors.border,
       extensions: [colors, metrics],
       iconTheme: IconThemeData(color: colors.text),
@@ -20,19 +19,22 @@ abstract class AppTheme {
       colorScheme: ColorScheme.fromSeed(
         seedColor: colors.primary,
         primary: colors.primary,
-        onPrimary: colors.primary,
+        onPrimary: colors.onPrimary,
+        secondary: colors.secondary,
+        onSecondary: colors.onSecondary,
+        tertiary: colors.tertiary,
+        onTertiary: colors.onTertiary,
         surface: colors.surface,
-        onSurface: colors.surface,
-        surfaceTint: colors.surfaceTint,
+        surfaceTint: colors.surface,
+        onSurface: colors.onSurface,
         error: colors.danger,
-        onError: colors.danger,
+        onError: colors.onDanger,
         outline: colors.border,
-        shadow: colors.shadow,
       ),
       appBarTheme: AppBarTheme(
-        shadowColor: colors.shadow,
-        foregroundColor: colors.onBackground,
-        backgroundColor: colors.background,
+        backgroundColor: colors.secondary,
+        surfaceTintColor: colors.secondary,
+        foregroundColor: colors.onSecondary,
       ),
       textTheme: GoogleFonts.interTextTheme(theme.textTheme).copyWith(
         bodySmall: GoogleFonts.inter(

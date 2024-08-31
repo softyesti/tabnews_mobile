@@ -5,11 +5,13 @@ class IconWidget extends StatelessWidget with ThemeMixin {
   const IconWidget(
     this.icon, {
     this.size,
+    this.color,
     super.key,
   });
 
   final IconData icon;
   final double? size;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class IconWidget extends StatelessWidget with ThemeMixin {
 
     return Icon(
       icon,
-      color: colors.text,
+      color: color ?? colors.text,
       size: size ?? metrics.icon,
     );
   }

@@ -20,9 +20,10 @@ class FabButtonWidget extends StatelessWidget with ThemeMixin {
     return IconButtonWidget(
       icon: icon,
       isFilled: true,
-      padding: EdgeInsets.all(metrics.large / 2),
-      color: colors.surfaceTint,
       onPressed: onPressed,
+      bgColor: colors.tertiary,
+      fgColor: colors.onTertiary,
+      padding: EdgeInsets.all(metrics.large / 2),
     );
   }
 }
