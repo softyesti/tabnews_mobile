@@ -26,7 +26,9 @@ class DetailedNewsCardWidget extends StatelessWidget {
           ],
         ),
         const SpacerWidget(size: SpacerWidgetSizes.small),
-        CardWidget(child: MarkdownViewerWidget(data: news.body)),
+        CardWidget(
+          child: MarkdownViewerWidget(data: '# ${news.title}\n${news.body}'),
+        ),
       ],
     );
   }
