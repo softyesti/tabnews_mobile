@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:tabnews/core/domain/entities/news_entity.dart';
+import 'package:tabnews/core/mixin/datetime_mixin.dart';
 import 'package:tabnews/core/mixin/theme_mixin.dart';
 import 'package:tabnews/core/widgets/button/icon_button_widget.dart';
 import 'package:tabnews/core/widgets/card_widget.dart';
@@ -8,7 +9,7 @@ import 'package:tabnews/core/widgets/spacer_widget.dart';
 import 'package:tabnews/core/widgets/text_widget.dart';
 import 'package:tabnews/core/widgets/touchable_widget.dart';
 
-class CompactNewsCardWidget extends StatelessWidget {
+class CompactNewsCardWidget extends StatelessWidget with DateTimeMixin {
   const CompactNewsCardWidget({
     required this.news,
     this.onPressed,
@@ -40,7 +41,7 @@ class CompactNewsCardWidget extends StatelessWidget {
                   children: [
                     TextWidget(news.ownerUsername),
                     const TextWidget(' • '),
-                    TextWidget(news.publishedAt.toIso8601String()),
+                    TextWidget(getRelativeTime(news.publishedAt)),
                   ],
                 ),
                 TextWidget(

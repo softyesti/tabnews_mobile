@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tabnews/core/domain/entities/news_entity.dart';
+import 'package:tabnews/core/mixin/datetime_mixin.dart';
 import 'package:tabnews/core/widgets/card_widget.dart';
 import 'package:tabnews/core/widgets/markdown/markdown_viewer_widget.dart';
 import 'package:tabnews/core/widgets/spacer_widget.dart';
 import 'package:tabnews/core/widgets/text_widget.dart';
 
-class DetailedNewsCardWidget extends StatelessWidget {
+class DetailedNewsCardWidget extends StatelessWidget with DateTimeMixin {
   const DetailedNewsCardWidget({
     required this.news,
     super.key,
@@ -23,7 +24,7 @@ class DetailedNewsCardWidget extends StatelessWidget {
             TextWidget(news.ownerUsername, size: TextWidgetSizes.titleMedium),
             const TextWidget(' • ', size: TextWidgetSizes.titleMedium),
             TextWidget(
-              news.publishedAt.toIso8601String(),
+              getRelativeTime(news.publishedAt),
               size: TextWidgetSizes.titleMedium,
             ),
           ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:tabnews/core/domain/entities/news_entity.dart';
+import 'package:tabnews/core/mixin/datetime_mixin.dart';
 import 'package:tabnews/core/widgets/button/icon_button_widget.dart';
 import 'package:tabnews/core/widgets/card_widget.dart';
 import 'package:tabnews/core/widgets/markdown/markdown_viewer_widget.dart';
@@ -55,7 +56,7 @@ class NewsCommentCardWidget extends StatelessWidget {
   }
 }
 
-class _HeaderWidget extends StatelessWidget {
+class _HeaderWidget extends StatelessWidget with DateTimeMixin {
   const _HeaderWidget({required this.comment});
 
   final NewsEntity comment;
@@ -67,7 +68,7 @@ class _HeaderWidget extends StatelessWidget {
         TextWidget(comment.ownerUsername, size: TextWidgetSizes.titleMedium),
         const TextWidget(' • ', size: TextWidgetSizes.titleMedium),
         TextWidget(
-          comment.publishedAt.toIso8601String(),
+          getRelativeTime(comment.publishedAt),
           size: TextWidgetSizes.titleMedium,
         ),
       ],
