@@ -1,12 +1,11 @@
-import 'package:tabnews/core/domain/entities/detailed_news_entity.dart';
-import 'package:tabnews/core/domain/entities/news_comment_entity.dart';
+import 'package:tabnews/core/domain/entities/news_entity.dart';
 
 abstract class NewsRepository {
-  Future<DetailedNewsEntity?> getOne({
+  Future<NewsEntity?> getOne({
     required String user,
     required String slug,
   });
-  Future<List<NewsCommentEntity>> getComments({
+  Future<List<NewsEntity>> getComments({
     required String user,
     required String slug,
   });

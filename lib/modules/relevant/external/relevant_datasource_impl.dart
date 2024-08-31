@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:tabnews/core/domain/entities/compact_news_entity.dart';
+import 'package:tabnews/core/domain/entities/news_entity.dart';
 import 'package:tabnews/modules/relevant/infra/relevant_datasource.dart';
 
 class RelevantDatasourceImpl implements RelevantDatasource {
@@ -8,7 +8,7 @@ class RelevantDatasourceImpl implements RelevantDatasource {
   final Dio dio;
 
   @override
-  Future<List<CompactNewsEntity>> getAll() async {
+  Future<List<NewsEntity>> getAll() async {
     final response = await dio.get<dynamic>(
       '/contents',
       queryParameters: {
@@ -22,7 +22,7 @@ class RelevantDatasourceImpl implements RelevantDatasource {
     if (data != null) {
       return data
           .map(
-            (e) => CompactNewsEntityMapper.fromMap(e as Map<String, dynamic>),
+            (e) => NewsEntityMapper.fromMap(e as Map<String, dynamic>),
           )
           .toList();
     }

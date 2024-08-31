@@ -1,8 +1,8 @@
-import 'package:tabnews/core/domain/entities/detailed_news_entity.dart';
+import 'package:tabnews/core/domain/entities/news_entity.dart';
 import 'package:tabnews/modules/news/domain/news_repository.dart';
 
 abstract class GetOneNewsUsecase {
-  Future<DetailedNewsEntity?> call({
+  Future<NewsEntity?> call({
     required String user,
     required String slug,
   });
@@ -14,7 +14,7 @@ class GetOneNewsUsecaseImpl implements GetOneNewsUsecase {
   final NewsRepository repository;
 
   @override
-  Future<DetailedNewsEntity?> call({
+  Future<NewsEntity?> call({
     required String user,
     required String slug,
   }) async {

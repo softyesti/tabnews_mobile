@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
-import 'package:tabnews/core/domain/entities/detailed_news_entity.dart';
-import 'package:tabnews/core/domain/entities/news_comment_entity.dart';
+import 'package:tabnews/core/domain/entities/news_entity.dart';
 import 'package:tabnews/modules/news/domain/usecases/get_news_comments_usecase.dart';
 import 'package:tabnews/modules/news/domain/usecases/get_one_news_usecase.dart';
 
@@ -12,8 +11,8 @@ class NewsPageController extends GetxController {
   // vars
   late String user;
   late String slug;
-  final Rx<DetailedNewsEntity?> news = Rx(null);
-  final Rx<List<NewsCommentEntity>> comments = Rx([]);
+  final Rx<NewsEntity?> news = Rx(null);
+  final Rx<List<NewsEntity>> comments = Rx([]);
 
   @override
   void onInit() {
@@ -32,7 +31,7 @@ class NewsPageController extends GetxController {
       _getNewsChildrenUsecase(user: user, slug: slug),
     ]);
 
-    news.value = data[0] as DetailedNewsEntity?;
-    comments.value = data[1] as List<NewsCommentEntity>? ?? [];
+    news.value = data[0] as NewsEntity?;
+    comments.value = data[1] as List<NewsEntity>? ?? [];
   }
 }

@@ -61,10 +61,10 @@ class _CommentPageState extends State<CommentPage> with ThemeMixin {
         ),
         const SliverToBoxAdapter(child: SpacerWidget()),
         SliverList.separated(
-          itemCount: controller.comment.comments.length,
+          itemCount: controller.comment.children.length,
           separatorBuilder: (_, __) => const SpacerWidget(),
           itemBuilder: (_, index) {
-            final comment = controller.comment.comments[index];
+            final comment = controller.comment.children[index];
 
             void onPressed() {
               Get.toNamed<void>(

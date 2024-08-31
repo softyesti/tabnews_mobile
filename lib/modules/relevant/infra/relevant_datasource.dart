@@ -1,5 +1,5 @@
-import 'package:tabnews/core/domain/entities/compact_news_entity.dart';
+import 'package:tabnews/core/domain/entities/news_entity.dart';
 
 abstract class RelevantDatasource {
-  Future<List<CompactNewsEntity>> getAll();
+  Future<List<NewsEntity>> getAll();
 }

@@ -1,15 +1,13 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
-part 'detailed_news_entity.mapper.dart';
+part 'news_entity.mapper.dart';
 
-@MappableClass()
-class DetailedNewsEntity with DetailedNewsEntityMappable {
-  const DetailedNewsEntity({
+@MappableClass(caseStyle: CaseStyle.snakeCase)
+class NewsEntity with NewsEntityMappable {
+  const NewsEntity({
     required this.id,
     required this.ownerId,
     required this.slug,
-    required this.title,
-    required this.body,
     required this.status,
     required this.createdAt,
     required this.updatedAt,
@@ -19,38 +17,39 @@ class DetailedNewsEntity with DetailedNewsEntityMappable {
     required this.tabcoinsCredit,
     required this.tabcoinsDebit,
     required this.commentCount,
+    required this.children,
+    this.title,
+    this.body,
   });
 
   final String id;
-
-  @MappableField(key: 'owner_id')
   final String ownerId;
-
   final String slug;
-  final String title;
-  final String body;
   final String status;
-
-  @MappableField(key: 'created_at')
-  final String createdAt;
-
-  @MappableField(key: 'updated_at')
-  final String updatedAt;
-
-  @MappableField(key: 'published_at')
-  final String publishedAt;
-
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final DateTime publishedAt;
   final int tabcoins;
-
-  @MappableField(key: 'tabcoins_credit')
   final int tabcoinsCredit;
-
-  @MappableField(key: 'tabcoins_debit')
   final int tabcoinsDebit;
-
-  @MappableField(key: 'owner_username')
   final String ownerUsername;
 
   @MappableField(key: 'children_deep_count')
   final int commentCount;
+
+  @MappableField(hook: NullToListHook())
+  final List<NewsEntity> children;
+
+  final String? title;
+  final String? body;
+}
+
+class NullToListHook extends MappingHook {
+  const NullToListHook();
+
+  @override
+  Object? beforeDecode(Object? value) {
+    if (value == null) return super.beforeDecode([]);
+    return super.beforeDecode(value);
+  }
 }

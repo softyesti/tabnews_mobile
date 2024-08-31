@@ -1,8 +1,8 @@
-import 'package:tabnews/core/domain/entities/compact_news_entity.dart';
+import 'package:tabnews/core/domain/entities/news_entity.dart';
 import 'package:tabnews/modules/relevant/domain/relevant_repository.dart';
 
 abstract class GetAllRelevantNewsUsecase {
-  Future<List<CompactNewsEntity>> call();
+  Future<List<NewsEntity>> call();
 }
 
 class GetAllRelevantNewsUsecaseImpl implements GetAllRelevantNewsUsecase {
@@ -11,7 +11,7 @@ class GetAllRelevantNewsUsecaseImpl implements GetAllRelevantNewsUsecase {
   final NewsRepository repository;
 
   @override
-  Future<List<CompactNewsEntity>> call() async {
+  Future<List<NewsEntity>> call() async {
     final news = await repository.getAll();
     return news;
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:tabnews/core/domain/entities/news_comment_entity.dart';
+import 'package:tabnews/core/domain/entities/news_entity.dart';
 import 'package:tabnews/core/widgets/button/icon_button_widget.dart';
 import 'package:tabnews/core/widgets/card_widget.dart';
 import 'package:tabnews/core/widgets/markdown/markdown_viewer_widget.dart';
@@ -19,7 +19,7 @@ class NewsCommentCardWidget extends StatelessWidget {
     super.key,
   });
 
-  final NewsCommentEntity comment;
+  final NewsEntity comment;
   final void Function()? onPressed;
   final void Function()? onCommentPressed;
   final void Function()? onUpperPressed;
@@ -38,7 +38,7 @@ class NewsCommentCardWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MarkdownViewerWidget(data: comment.body),
+                MarkdownViewerWidget(data: comment.body!),
                 const SpacerWidget(),
                 _ActionsWidget(
                   comment: comment,
@@ -58,7 +58,7 @@ class NewsCommentCardWidget extends StatelessWidget {
 class _HeaderWidget extends StatelessWidget {
   const _HeaderWidget({required this.comment});
 
-  final NewsCommentEntity comment;
+  final NewsEntity comment;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,10 @@ class _HeaderWidget extends StatelessWidget {
       children: [
         TextWidget(comment.ownerUsername, size: TextWidgetSizes.titleMedium),
         const TextWidget(' • ', size: TextWidgetSizes.titleMedium),
-        TextWidget(comment.publishedAt, size: TextWidgetSizes.titleMedium),
+        TextWidget(
+          comment.publishedAt.toIso8601String(),
+          size: TextWidgetSizes.titleMedium,
+        ),
       ],
     );
   }
@@ -80,7 +83,7 @@ class _ActionsWidget extends StatelessWidget {
     required this.onCommentPressed,
   });
 
-  final NewsCommentEntity comment;
+  final NewsEntity comment;
   final void Function()? onUpperPressed;
   final void Function()? onDownPressed;
   final void Function()? onCommentPressed;

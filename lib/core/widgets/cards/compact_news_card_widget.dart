@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:tabnews/core/domain/entities/compact_news_entity.dart';
+import 'package:tabnews/core/domain/entities/news_entity.dart';
 import 'package:tabnews/core/mixin/theme_mixin.dart';
 import 'package:tabnews/core/widgets/button/icon_button_widget.dart';
 import 'package:tabnews/core/widgets/card_widget.dart';
@@ -18,7 +18,7 @@ class CompactNewsCardWidget extends StatelessWidget {
     super.key,
   });
 
-  final CompactNewsEntity news;
+  final NewsEntity news;
   final void Function()? onPressed;
   final void Function()? onCommentPressed;
   final void Function()? onUpperPressed;
@@ -40,10 +40,13 @@ class CompactNewsCardWidget extends StatelessWidget {
                   children: [
                     TextWidget(news.ownerUsername),
                     const TextWidget(' • '),
-                    TextWidget(news.publishedAt),
+                    TextWidget(news.publishedAt.toIso8601String()),
                   ],
                 ),
-                TextWidget(news.title, size: TextWidgetSizes.titleLarge),
+                TextWidget(
+                  news.title!,
+                  size: TextWidgetSizes.titleLarge,
+                ),
               ],
             ),
             const SpacerWidget(),
@@ -68,7 +71,7 @@ class _ActionsWidget extends StatelessWidget with ThemeMixin {
     required this.onCommentPressed,
   });
 
-  final CompactNewsEntity news;
+  final NewsEntity news;
   final void Function()? onUpperPressed;
   final void Function()? onDownPressed;
   final void Function()? onCommentPressed;

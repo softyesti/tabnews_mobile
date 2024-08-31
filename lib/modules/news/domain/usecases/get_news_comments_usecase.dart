@@ -1,8 +1,9 @@
-import 'package:tabnews/core/domain/entities/news_comment_entity.dart';
+import 'package:tabnews/core/domain/entities/news_entity.dart';
+
 import 'package:tabnews/modules/news/domain/news_repository.dart';
 
 abstract class GetNewsCommentsUsecase {
-  Future<List<NewsCommentEntity>> call({
+  Future<List<NewsEntity>> call({
     required String user,
     required String slug,
   });
@@ -14,7 +15,7 @@ class GetNewsCommentsUsecaseImpl implements GetNewsCommentsUsecase {
   final NewsRepository repository;
 
   @override
-  Future<List<NewsCommentEntity>> call({
+  Future<List<NewsEntity>> call({
     required String user,
     required String slug,
   }) async {
