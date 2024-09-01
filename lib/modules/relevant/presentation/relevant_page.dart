@@ -45,6 +45,7 @@ class _ChildWidget extends GetView<RelevantPageController> {
             final news = controller.news.value[index];
             return CompactNewsCardWidget(
               news: news,
+              index: index + 1,
               onPressed: () => Get.toNamed<void>(
                 AppRoutes.news,
                 parameters: {'user': news.ownerUsername, 'slug': news.slug},

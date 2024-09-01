@@ -13,10 +13,12 @@ class CompactNewsCardWidget extends StatelessWidget
     with ThemeMixin, DateTimeMixin {
   const CompactNewsCardWidget({
     required this.news,
+    required this.index,
     this.onPressed,
     super.key,
   });
 
+  final int index;
   final NewsEntity news;
   final void Function()? onPressed;
 
@@ -27,17 +29,26 @@ class CompactNewsCardWidget extends StatelessWidget
     return TouchableWidget(
       onPressed: onPressed,
       child: CardWidget(
-        child: Column(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
           children: [
-            HeaderWidget(news: news),
-            TextWidget(
-              news.title!,
-              size: TextWidgetSizes.titleLarge,
+            TextWidget('$index.', size: TextWidgetSizes.titleMedium),
+            const SpacerWidget(
+              direction: Axis.horizontal,
+              size: SpacerWidgetSizes.small,
             ),
-            const SpacerWidget(size: SpacerWidgetSizes.small),
-            ActionsWidget(news: news, color: colors.textAlt),
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  HeaderWidget(news: news),
+                  TextWidget(news.title!, size: TextWidgetSizes.titleMedium),
+                  const SpacerWidget(size: SpacerWidgetSizes.small),
+                  ActionsWidget(news: news, color: colors.textAlt),
+                ],
+              ),
+            ),
           ],
         ),
       ),
