@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tabnews/core/theme/extensions/theme_colors_extension.dart';
 import 'package:tabnews/core/theme/theme_colors.dart';
 import 'package:tabnews/core/theme/theme_metrics.dart';
 
-abstract class AppTheme {
-  static ThemeData get({required bool isDark}) {
+enum AppThemeColors { modern, classical, black }
+
+class AppTheme {
+  const AppTheme({
+    required this.isDark,
+    required this.colors,
+  });
+
+  final bool isDark;
+  final AppThemeColors colors;
+
+  ThemeData get() {
     final theme = isDark ? ThemeData.dark() : ThemeData.light();
-    final colors = isDark ? const ThemeDarkColors() : const ThemeLightColors();
+    final colors = _getColorScheme();
     final metrics = ThemeMetricsImpl.get(colors);
 
     return theme.copyWith(
@@ -84,5 +95,21 @@ abstract class AppTheme {
         ),
       ),
     );
+  }
+
+  ThemeColors _getColorScheme() {
+    late ThemeColors colors;
+    switch (this.colors) {
+      case AppThemeColors.modern:
+        colors = const ThemeLightColors();
+        if (isDark) colors = const ThemeDarkColors();
+      case AppThemeColors.classical:
+        colors = const ThemeClassicalLightColors();
+        if (isDark) colors = const ThemeClassicalDarkColors();
+      case AppThemeColors.black:
+        colors = const ThemeBlackColors();
+    }
+
+    return colors;
   }
 }
