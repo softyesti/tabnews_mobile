@@ -10,7 +10,7 @@ final class ThemeMetricsImpl extends ThemeMetrics {
     super.icon = 18,
     super.blur = 24,
     super.border = const BorderSide(),
-    super.radius = const Radius.circular(16),
+    super.radius = const Radius.circular(8),
     super.shadow = const BoxShadow(),
     super.header = Size.zero,
     super.footer = Size.zero,
