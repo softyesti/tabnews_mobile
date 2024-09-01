@@ -17,10 +17,11 @@ class IconWidget extends StatelessWidget with ThemeMixin {
   Widget build(BuildContext context) {
     final colors = getColors();
     final metrics = getMetrics();
+    final fgColor = color ?? colors.text;
 
     return Icon(
       icon,
-      color: color ?? colors.text,
+      color: fgColor,
       size: size ?? metrics.icon,
     );
   }

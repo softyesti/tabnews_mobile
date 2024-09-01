@@ -49,7 +49,7 @@ class IconButtonWidget extends StatelessWidget with ThemeMixin {
             direction: Axis.horizontal,
             size: SpacerWidgetSizes.small,
           ),
-          if (label != null) TextWidget(label!),
+          if (label != null) TextWidget(label!, color: fgColor),
         ],
       ),
     );
