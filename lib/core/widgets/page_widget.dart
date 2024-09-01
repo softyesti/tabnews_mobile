@@ -7,6 +7,7 @@ class PageWidget extends StatelessWidget {
     this.appBar,
     this.body,
     this.padding,
+    this.isLoading = false,
     this.floatingActionButton,
     this.bottomNavigationBar,
     this.child,
@@ -41,6 +42,7 @@ class PageWidget extends StatelessWidget {
   final Size appBarSize;
   final Widget? appBar;
   final Widget? body;
+  final bool isLoading;
   final EdgeInsets? padding;
   final Widget? floatingActionButton;
   final Widget? bottomNavigationBar;
@@ -62,7 +64,11 @@ class PageWidget extends StatelessWidget {
             : null,
         body: PaddingWidget(
           padding: padding,
-          child: body ?? child ?? const SizedBox(),
+          child: Visibility(
+            visible: isLoading,
+            replacement: body ?? child ?? const SizedBox(),
+            child: const Center(child: CircularProgressIndicator.adaptive()),
+          ),
         ),
         floatingActionButton: floatingActionButton,
         bottomNavigationBar: bottomNavigationBar,
