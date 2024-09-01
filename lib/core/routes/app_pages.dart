@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:tabnews/core/bindings/comment_page_binding.dart';
+import 'package:tabnews/core/bindings/home_page_binding.dart';
 import 'package:tabnews/core/bindings/news_page_binding.dart';
-import 'package:tabnews/core/bindings/relevant_page_binding.dart';
 import 'package:tabnews/core/bindings/root_page_binding.dart';
 import 'package:tabnews/core/routes/app_routes.dart';
 import 'package:tabnews/modules/comment/presentation/comment_page.dart';
@@ -14,9 +14,9 @@ abstract class AppPages {
       title: 'TabNews',
       name: AppRoutes.initial,
       page: RootPage.new,
-      bindings: [
-        const RootPageBinding(),
-        RelevantPageBinding(),
+      bindings: const [
+        RootPageBinding(),
+        HomePageBinding(),
       ],
     ),
     GetPage<void>(
