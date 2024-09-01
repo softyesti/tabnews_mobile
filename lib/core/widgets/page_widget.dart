@@ -6,6 +6,7 @@ class PageWidget extends StatelessWidget {
     this.appBarSize = const Size.fromHeight(50),
     this.appBar,
     this.body,
+    this.padding,
     this.floatingActionButton,
     this.bottomNavigationBar,
     this.child,
@@ -28,10 +29,10 @@ class PageWidget extends StatelessWidget {
         left: false,
         right: false,
         child: CustomScrollView(
-          clipBehavior: Clip.none,
           anchor: anchor,
-          controller: scrollController,
           slivers: slivers,
+          clipBehavior: Clip.none,
+          controller: scrollController,
         ),
       ),
     );
@@ -40,6 +41,7 @@ class PageWidget extends StatelessWidget {
   final Size appBarSize;
   final Widget? appBar;
   final Widget? body;
+  final EdgeInsets? padding;
   final Widget? floatingActionButton;
   final Widget? bottomNavigationBar;
   final Widget? child;
@@ -51,14 +53,15 @@ class PageWidget extends StatelessWidget {
         bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
       child: Scaffold(
-        extendBodyBehindAppBar: true,
         extendBody: true,
-        resizeToAvoidBottomInset: false,
-        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+        extendBodyBehindAppBar: true,
+        resizeToAvoidBottomInset: true,
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         appBar: appBar != null
             ? PreferredSize(preferredSize: appBarSize, child: appBar!)
             : null,
         body: PaddingWidget(
+          padding: padding,
           child: body ?? child ?? const SizedBox(),
         ),
         floatingActionButton: floatingActionButton,
