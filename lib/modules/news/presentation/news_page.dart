@@ -6,12 +6,10 @@ import 'package:tabnews/core/routes/app_routes.dart';
 import 'package:tabnews/core/widgets/appbar_widget.dart';
 import 'package:tabnews/core/widgets/button/fab_button_widget.dart';
 import 'package:tabnews/core/widgets/cards/detailed_news_card_widget.dart';
-import 'package:tabnews/core/widgets/cards/news_comment_card_widget.dart';
 import 'package:tabnews/core/widgets/page_widget.dart';
 import 'package:tabnews/core/widgets/spacer_widget.dart';
 import 'package:tabnews/core/widgets/text_widget.dart';
 import 'package:tabnews/core/widgets/wrap_widget.dart';
-import 'package:tabnews/modules/comment/presentation/comment_dialog_widget.dart';
 import 'package:tabnews/modules/news/presentation/news_page_controller.dart';
 
 class NewsPage extends GetView<NewsPageController> {
@@ -51,7 +49,7 @@ class _ChildWidget extends StatelessWidget {
         SliverToBoxAdapter(
           child: TextWidget(
             'Respostas',
-            size: TextWidgetSizes.titleMedium,
+            size: TextWidgetSizes.titleLarge,
             key: repliesKey,
           ),
         ),
@@ -93,32 +91,32 @@ class _FabButtonsWidget extends StatelessWidget with ThemeMixin {
       spacing: WrapWidgetSpacings.small,
       children: [
         FabButtonWidget(
-          icon: Ionicons.arrow_up_outline,
+          icon: Ionicons.chevron_up_outline,
           onPressed: () => scrollController.animateTo(
             0,
-            duration: metrics.duration,
             curve: metrics.curve,
+            duration: metrics.duration,
           ),
         ),
         FabButtonWidget(
-          icon: Ionicons.arrow_down_outline,
+          icon: Ionicons.chevron_down_outline,
           onPressed: () => Scrollable.ensureVisible(
             repliesKey.currentContext!,
-            duration: metrics.duration,
             curve: metrics.curve,
+            duration: metrics.duration,
           ),
         ),
-        FabButtonWidget(
-          icon: Ionicons.chatbubble_outline,
-          onPressed: () => Get.bottomSheet<void>(
-            const CommentDialogWidget(),
-            isScrollControlled: true,
-            ignoreSafeArea: false,
-            backgroundColor: Colors.transparent,
-            enterBottomSheetDuration: metrics.duration,
-            exitBottomSheetDuration: metrics.duration,
-          ),
-        ),
+        // FabButtonWidget(
+        //   icon: Ionicons.chatbubble_outline,
+        //   onPressed: () => Get.bottomSheet<void>(
+        //     const CommentDialogWidget(),
+        //     isScrollControlled: true,
+        //     ignoreSafeArea: false,
+        //     backgroundColor: Colors.transparent,
+        //     enterBottomSheetDuration: metrics.duration,
+        //     exitBottomSheetDuration: metrics.duration,
+        //   ),
+        // ),
       ],
     );
   }
@@ -164,9 +162,8 @@ class _CommentsWidget extends GetView<NewsPageController> {
             );
           }
 
-          return NewsCommentCardWidget(
-            comment: comment,
-            onPressed: onPressed,
+          return DetailedNewsCardWidget(
+            news: comment,
             onCommentPressed: onPressed,
           );
         },

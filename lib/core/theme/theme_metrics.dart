@@ -24,12 +24,15 @@ final class ThemeMetricsImpl extends ThemeMetrics {
       vertical: 10,
       horizontal: 12,
     ),
+    super.card = const ThemeCardMetrics(
+      haveBorder: false,
+      padding: EdgeInsets.zero,
+    ),
     super.curve = Curves.linear,
     super.duration = const Duration(milliseconds: 200),
   });
 
-  // ignore: avoid_unused_constructor_parameters
   factory ThemeMetricsImpl.get(ThemeColors colors) {
-    return const ThemeMetricsImpl(border: BorderSide.none);
+    return ThemeMetricsImpl(border: BorderSide(color: colors.border));
   }
 }

@@ -4,7 +4,6 @@ import 'package:tabnews/core/mixin/theme_mixin.dart';
 import 'package:tabnews/core/routes/app_routes.dart';
 import 'package:tabnews/core/widgets/appbar_widget.dart';
 import 'package:tabnews/core/widgets/cards/detailed_news_card_widget.dart';
-import 'package:tabnews/core/widgets/cards/news_comment_card_widget.dart';
 import 'package:tabnews/core/widgets/page_widget.dart';
 import 'package:tabnews/core/widgets/spacer_widget.dart';
 import 'package:tabnews/core/widgets/text_widget.dart';
@@ -51,7 +50,7 @@ class _CommentPageState extends State<CommentPage> with ThemeMixin {
           child: SpacerWidget(size: SpacerWidgetSizes.large),
         ),
         SliverToBoxAdapter(
-          child: NewsCommentCardWidget(comment: controller.comment),
+          child: DetailedNewsCardWidget(news: controller.comment),
         ),
         const SliverToBoxAdapter(
           child: SpacerWidget(size: SpacerWidgetSizes.large),
@@ -73,9 +72,8 @@ class _CommentPageState extends State<CommentPage> with ThemeMixin {
               );
             }
 
-            return NewsCommentCardWidget(
-              comment: comment,
-              onPressed: onPressed,
+            return DetailedNewsCardWidget(
+              news: comment,
               onCommentPressed: onPressed,
             );
           },

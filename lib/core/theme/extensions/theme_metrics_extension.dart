@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ base class ThemeMetrics extends ThemeExtension<ThemeMetrics> {
     required this.header,
     required this.footer,
     required this.button,
+    required this.card,
     required this.buttonPadding,
     required this.field,
     required this.fieldPadding,
@@ -35,6 +37,7 @@ base class ThemeMetrics extends ThemeExtension<ThemeMetrics> {
   final Size footer;
   final Size button;
   final EdgeInsets buttonPadding;
+  final ThemeCardMetrics card;
   final Size field;
   final EdgeInsets fieldPadding;
   final Curve curve;
@@ -54,6 +57,7 @@ base class ThemeMetrics extends ThemeExtension<ThemeMetrics> {
     Size? footer,
     Size? button,
     EdgeInsets? buttonPadding,
+    ThemeCardMetrics? card,
     Size? field,
     EdgeInsets? fieldPadding,
     Curve? curve,
@@ -72,6 +76,7 @@ base class ThemeMetrics extends ThemeExtension<ThemeMetrics> {
       footer: footer ?? this.footer,
       button: button ?? this.button,
       buttonPadding: buttonPadding ?? this.buttonPadding,
+      card: card ?? this.card,
       field: field ?? this.field,
       fieldPadding: fieldPadding ?? this.fieldPadding,
       curve: curve ?? this.curve,
@@ -101,10 +106,33 @@ base class ThemeMetrics extends ThemeExtension<ThemeMetrics> {
       footer: Size.lerp(footer, other.footer, t)!,
       button: Size.lerp(button, other.button, t)!,
       buttonPadding: EdgeInsets.lerp(buttonPadding, other.buttonPadding, t)!,
+      card: card.copyWith(
+        padding: EdgeInsets.lerp(card.padding, other.card.padding, t),
+      ),
       field: Size.lerp(field, other.field, t)!,
       fieldPadding: EdgeInsets.lerp(fieldPadding, other.fieldPadding, t)!,
       curve: t < 0.5 ? curve : other.curve,
       duration: lerpDuration(duration, other.duration, t),
+    );
+  }
+}
+
+class ThemeCardMetrics {
+  const ThemeCardMetrics({
+    required this.padding,
+    required this.haveBorder,
+  });
+
+  final bool haveBorder;
+  final EdgeInsets padding;
+
+  ThemeCardMetrics copyWith({
+    bool? haveBorder,
+    EdgeInsets? padding,
+  }) {
+    return ThemeCardMetrics(
+      haveBorder: haveBorder ?? this.haveBorder,
+      padding: padding ?? this.padding,
     );
   }
 }

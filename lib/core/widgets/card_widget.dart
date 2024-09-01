@@ -32,10 +32,10 @@ class CardWidget extends StatelessWidget with ThemeMixin {
         surfaceTintColor: colors.surface,
         shape: RoundedRectangleBorder(
           borderRadius: borderRadius ?? BorderRadius.all(metrics.radius),
-          side: metrics.border,
+          side: metrics.card.haveBorder ? metrics.border : BorderSide.none,
         ),
         child: PaddingWidget(
-          padding: padding,
+          padding: padding ?? metrics.card.padding,
           child: child,
         ),
       ),

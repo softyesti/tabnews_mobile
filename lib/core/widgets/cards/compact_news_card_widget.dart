@@ -1,32 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:tabnews/core/domain/entities/news_entity.dart';
 import 'package:tabnews/core/mixin/datetime_mixin.dart';
 import 'package:tabnews/core/mixin/theme_mixin.dart';
-import 'package:tabnews/core/widgets/button/icon_button_widget.dart';
 import 'package:tabnews/core/widgets/card_widget.dart';
+import 'package:tabnews/core/widgets/cards/widgets/actions_widget.dart';
+import 'package:tabnews/core/widgets/cards/widgets/header_widget.dart';
 import 'package:tabnews/core/widgets/spacer_widget.dart';
 import 'package:tabnews/core/widgets/text_widget.dart';
 import 'package:tabnews/core/widgets/touchable_widget.dart';
 
-class CompactNewsCardWidget extends StatelessWidget with DateTimeMixin {
+class CompactNewsCardWidget extends StatelessWidget
+    with ThemeMixin, DateTimeMixin {
   const CompactNewsCardWidget({
     required this.news,
     this.onPressed,
-    this.onCommentPressed,
-    this.onUpperPressed,
-    this.onDownPressed,
     super.key,
   });
 
   final NewsEntity news;
   final void Function()? onPressed;
-  final void Function()? onCommentPressed;
-  final void Function()? onUpperPressed;
-  final void Function()? onDownPressed;
 
   @override
   Widget build(BuildContext context) {
+    final colors = getColors();
+
     return TouchableWidget(
       onPressed: onPressed,
       child: CardWidget(
@@ -34,73 +31,16 @@ class CompactNewsCardWidget extends StatelessWidget with DateTimeMixin {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    TextWidget(news.ownerUsername),
-                    const TextWidget(' • '),
-                    TextWidget(getRelativeTime(news.publishedAt)),
-                  ],
-                ),
-                TextWidget(
-                  news.title!,
-                  size: TextWidgetSizes.titleLarge,
-                ),
-              ],
+            HeaderWidget(news: news),
+            TextWidget(
+              news.title!,
+              size: TextWidgetSizes.titleLarge,
             ),
-            const SpacerWidget(),
-            _ActionsWidget(
-              news: news,
-              onCommentPressed: onCommentPressed,
-              onUpperPressed: onUpperPressed,
-              onDownPressed: onDownPressed,
-            ),
+            const SpacerWidget(size: SpacerWidgetSizes.small),
+            ActionsWidget(news: news, color: colors.textAlt),
           ],
         ),
       ),
-    );
-  }
-}
-
-class _ActionsWidget extends StatelessWidget with ThemeMixin {
-  const _ActionsWidget({
-    required this.news,
-    required this.onUpperPressed,
-    required this.onDownPressed,
-    required this.onCommentPressed,
-  });
-
-  final NewsEntity news;
-  final void Function()? onUpperPressed;
-  final void Function()? onDownPressed;
-  final void Function()? onCommentPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    final metrics = getMetrics();
-
-    return Wrap(
-      spacing: metrics.medium,
-      runSpacing: metrics.medium,
-      children: [
-        IconButtonWidget(
-          icon: Ionicons.arrow_up_outline,
-          label: news.tabcoinsCredit.toString(),
-          onPressed: onUpperPressed,
-        ),
-        IconButtonWidget(
-          icon: Ionicons.arrow_down_outline,
-          label: news.tabcoinsDebit.toString(),
-          onPressed: onDownPressed,
-        ),
-        IconButtonWidget(
-          icon: Ionicons.chatbubble_outline,
-          label: news.commentCount.toString(),
-          onPressed: onCommentPressed,
-        ),
-      ],
     );
   }
 }
