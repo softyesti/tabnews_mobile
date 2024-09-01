@@ -5,6 +5,7 @@ import 'package:tabnews/core/widgets/padding_widget.dart';
 class CardWidget extends StatelessWidget with ThemeMixin {
   const CardWidget({
     required this.child,
+    this.width,
     this.height,
     this.padding,
     this.borderRadius,
@@ -13,6 +14,7 @@ class CardWidget extends StatelessWidget with ThemeMixin {
   });
 
   final Widget child;
+  final double? width;
   final double? height;
   final EdgeInsets? padding;
   final BorderRadius? borderRadius;
@@ -24,6 +26,7 @@ class CardWidget extends StatelessWidget with ThemeMixin {
     final metrics = getMetrics();
 
     return SizedBox(
+      width: width,
       height: height,
       child: Card(
         elevation: 0,
