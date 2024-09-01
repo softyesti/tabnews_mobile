@@ -64,7 +64,7 @@ class IconButtonWidget extends StatelessWidget with ThemeMixin {
           decoration: BoxDecoration(
             color: bgColor ?? colors.primary,
             border: Border.fromBorderSide(metrics.border),
-            shape: BoxShape.circle,
+            borderRadius: BorderRadius.all(metrics.radius),
           ),
           child: child,
         ),
