@@ -4,12 +4,14 @@ import 'package:tabnews/core/mixin/theme_mixin.dart';
 class WrapWidget extends StatelessWidget with ThemeMixin {
   const WrapWidget({
     this.direction = Axis.vertical,
+    this.alignment = WrapAlignment.start,
     this.spacing = WrapWidgetSpacings.medium,
     this.children = const [],
     super.key,
   });
 
   final Axis direction;
+  final WrapAlignment alignment;
   final WrapWidgetSpacings spacing;
   final List<Widget> children;
 
@@ -31,6 +33,7 @@ class WrapWidget extends StatelessWidget with ThemeMixin {
       direction: direction,
       spacing: value,
       runSpacing: value,
+      alignment: alignment,
       children: children,
     );
   }
