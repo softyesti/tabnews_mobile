@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:tabnews/core/domain/entities/news_entity.dart';
 import 'package:tabnews/core/mixin/theme_mixin.dart';
 import 'package:tabnews/core/routes/app_routes.dart';
 import 'package:tabnews/core/widgets/appbar_widget.dart';
@@ -17,60 +18,34 @@ class NewsPage extends GetView<NewsPageController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      if (controller.news.value != null) return const _ChildWidget();
-      return const PageWidget(
-        body: Center(child: CircularProgressIndicator.adaptive()),
-      );
-    });
-  }
-}
-
-class _ChildWidget extends StatelessWidget {
-  const _ChildWidget();
-
-  @override
-  Widget build(Object context) {
     final repliesKey = GlobalKey();
     final scrollController = ScrollController();
 
-    return PageWidget.sliver(
-      scrollController: scrollController,
-      appBar: _AppBarWidget(scrollController: scrollController),
-      floatingActionButton: _FabButtonsWidget(
-        repliesKey: repliesKey,
+    return Obx(() {
+      final news = controller.news;
+      final replies = controller.comments;
+      final isLoading = controller.isLoading;
+
+      return PageWidget.sliver(
+        isLoading: isLoading,
         scrollController: scrollController,
-      ),
-      slivers: [
-        const _NewsWidget(),
-        const SliverToBoxAdapter(
-          child: SpacerWidget(size: SpacerWidgetSizes.large),
+        appBar: AppBarWidget(
+          showLeading: true,
+          scrollController: scrollController,
         ),
-        SliverToBoxAdapter(
-          child: TextWidget(
-            'Respostas',
-            size: TextWidgetSizes.titleLarge,
-            key: repliesKey,
-          ),
+        floatingActionButton: _FabButtonsWidget(
+          repliesKey: repliesKey,
+          scrollController: scrollController,
         ),
-        const SliverToBoxAdapter(child: SpacerWidget()),
-        const _CommentsWidget(),
-      ],
-    );
-  }
-}
-
-class _AppBarWidget extends GetView<NewsPageController> {
-  const _AppBarWidget({required this.scrollController});
-
-  final ScrollController scrollController;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBarWidget(
-      showLeading: true,
-      scrollController: scrollController,
-    );
+        slivers: [
+          if (news != null) _NewsWidget(news: news),
+          const _SpacerWidget(size: SpacerWidgetSizes.large),
+          _RepliesTitleWidget(key: repliesKey),
+          const _SpacerWidget(),
+          if (news != null) _RepliesWidget(news: news, replies: replies),
+        ],
+      );
+    });
   }
 }
 
@@ -106,68 +81,80 @@ class _FabButtonsWidget extends StatelessWidget with ThemeMixin {
             duration: metrics.duration,
           ),
         ),
-        // FabButtonWidget(
-        //   icon: Ionicons.chatbubble_outline,
-        //   onPressed: () => Get.bottomSheet<void>(
-        //     const CommentDialogWidget(),
-        //     isScrollControlled: true,
-        //     ignoreSafeArea: false,
-        //     backgroundColor: Colors.transparent,
-        //     enterBottomSheetDuration: metrics.duration,
-        //     exitBottomSheetDuration: metrics.duration,
-        //   ),
-        // ),
       ],
     );
   }
 }
 
-class _NewsWidget extends GetView<NewsPageController> {
-  const _NewsWidget();
+class _NewsWidget extends StatelessWidget {
+  const _NewsWidget({required this.news});
+
+  final NewsEntity news;
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => SliverToBoxAdapter(
-        child: DetailedNewsCardWidget(
-          news: controller.news.value!,
-        ),
+    return SliverToBoxAdapter(
+      child: DetailedNewsCardWidget(news: news),
+    );
+  }
+}
+
+class _SpacerWidget extends StatelessWidget {
+  const _SpacerWidget({this.size = SpacerWidgetSizes.medium});
+
+  final SpacerWidgetSizes size;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: SpacerWidget(size: size),
+    );
+  }
+}
+
+class _RepliesTitleWidget extends StatelessWidget {
+  const _RepliesTitleWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const SliverToBoxAdapter(
+      child: TextWidget(
+        'Respostas',
+        size: TextWidgetSizes.titleLarge,
       ),
     );
   }
 }
 
-class _CommentsWidget extends GetView<NewsPageController> {
-  const _CommentsWidget();
+class _RepliesWidget extends GetView<NewsPageController> {
+  const _RepliesWidget({
+    required this.news,
+    required this.replies,
+  });
+
+  final NewsEntity news;
+  final List<NewsEntity> replies;
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      final news = controller.news.value!;
-      final comments = controller.comments.value;
+    return SliverList.separated(
+      itemCount: replies.length,
+      separatorBuilder: (_, __) => const SpacerWidget(),
+      itemBuilder: (_, index) {
+        final comment = replies[index];
+        final params = {
+          'news': news.toJson(),
+          'comment': comment.toJson(),
+        };
 
-      return SliverList.separated(
-        itemCount: comments.length,
-        separatorBuilder: (_, __) => const SpacerWidget(),
-        itemBuilder: (_, index) {
-          final comment = comments[index];
-
-          void onPressed() {
-            Get.toNamed<void>(
-              AppRoutes.comment,
-              parameters: {
-                'news': news.toJson(),
-                'comment': comment.toJson(),
-              },
-            );
-          }
-
-          return DetailedNewsCardWidget(
-            news: comment,
-            onCommentPressed: onPressed,
-          );
-        },
-      );
-    });
+        return DetailedNewsCardWidget(
+          news: comment,
+          onCommentPressed: () async => Get.toNamed<void>(
+            AppRoutes.comment,
+            parameters: params,
+          ),
+        );
+      },
+    );
   }
 }
