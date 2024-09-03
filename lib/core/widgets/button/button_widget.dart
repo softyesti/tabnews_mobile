@@ -25,21 +25,27 @@ class ButtonWidget extends StatelessWidget with ThemeMixin {
     return TouchableWidget(
       onPressed: onPressed,
       child: Container(
+        width: metrics.button.width,
+        height: metrics.button.height,
         padding: metrics.buttonPadding,
         decoration: BoxDecoration(
           color: colors.primary,
-          borderRadius: BorderRadius.circular(100),
+          borderRadius: BorderRadius.all(metrics.radius / 1.2),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (icon != null) IconWidget(icon!),
+            if (icon != null) IconWidget(icon!, color: colors.onPrimary),
             if (icon != null)
               const SpacerWidget(
                 direction: Axis.horizontal,
                 size: SpacerWidgetSizes.small,
               ),
-            TextWidget(text, size: TextWidgetSizes.titleMedium),
+            TextWidget(
+              text,
+              color: colors.onPrimary,
+              size: TextWidgetSizes.titleMedium,
+            ),
           ],
         ),
       ),
