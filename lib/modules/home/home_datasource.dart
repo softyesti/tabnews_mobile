@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 abstract class HomeDatasource {
-  Future<List<dynamic>> getAll();
+  Future<List<dynamic>> getAll({required String strategy});
 }
 
 class HomeDatasourceImpl implements HomeDatasource {
@@ -10,13 +10,13 @@ class HomeDatasourceImpl implements HomeDatasource {
   final Dio dio;
 
   @override
-  Future<List<dynamic>> getAll() async {
+  Future<List<dynamic>> getAll({required String strategy}) async {
     final response = await dio.get<List<dynamic>>(
       '/contents',
       queryParameters: {
         'page': 1,
-        'per_page': 10,
-        'strategy': 'relevant',
+        'per_page': 30,
+        'strategy': strategy,
       },
     );
 

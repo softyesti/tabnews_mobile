@@ -1,8 +1,9 @@
 import 'package:tabnews/core/domain/entities/news_entity.dart';
+import 'package:tabnews/core/domain/enums/news_filter_enum.dart';
 import 'package:tabnews/modules/home/home_datasource.dart';
 
 abstract class HomeRepository {
-  Future<List<NewsEntity>> getAll();
+  Future<List<NewsEntity>> getAll({required NewsFilterEnum filter});
 }
 
 class HomeRepositoryImpl implements HomeRepository {
@@ -11,8 +12,8 @@ class HomeRepositoryImpl implements HomeRepository {
   final HomeDatasource datasource;
 
   @override
-  Future<List<NewsEntity>> getAll() async {
-    final news = await datasource.getAll();
+  Future<List<NewsEntity>> getAll({required NewsFilterEnum filter}) async {
+    final news = await datasource.getAll(strategy: filter.value);
     return news
         .map((e) => NewsEntityMapper.fromMap(e as Map<String, dynamic>))
         .toList();
