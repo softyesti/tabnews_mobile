@@ -6,18 +6,22 @@ import 'package:ionicons/ionicons.dart';
 import 'package:tabnews/core/mixin/theme_mixin.dart';
 import 'package:tabnews/core/widgets/blur_widget.dart';
 import 'package:tabnews/core/widgets/button/icon_button_widget.dart';
+import 'package:tabnews/core/widgets/safe_area_widget.dart';
 import 'package:tabnews/core/widgets/text_widget.dart';
+import 'package:tabnews/core/widgets/wrap_widget.dart';
 
 class AppBarWidget extends StatefulWidget {
   const AppBarWidget({
-    this.showLeading = false,
     this.title,
     this.scrollController,
+    this.actions = const [],
+    this.showLeading = false,
     super.key,
   });
 
-  final bool showLeading;
   final String? title;
+  final bool showLeading;
+  final List<Widget> actions;
   final ScrollController? scrollController;
 
   @override
@@ -51,24 +55,33 @@ class _AppBarWidgetState extends State<AppBarWidget> with ThemeMixin {
     final colors = getColors();
     final metrics = getMetrics();
 
-    final titleSpacing = -NavigationToolbar.kMiddleSpacing + metrics.medium;
-
     return BlurWidget(
       isEnabled: isBlurEnabled,
-      child: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: false,
-        backgroundColor: colors.secondary,
-        surfaceTintColor: colors.secondary,
-        titleSpacing: widget.showLeading ? titleSpacing : null,
-        leading: widget.showLeading ? const _LeadingWidget() : null,
-        title: widget.title != null
-            ? TextWidget(
-                widget.title!,
-                color: colors.onSecondary,
-                size: TextWidgetSizes.headlineLarge,
-              )
-            : null,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: metrics.medium)
+            .copyWith(bottom: metrics.small),
+        color: colors.secondary,
+        child: SafeAreaWidget(
+          top: true,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (widget.showLeading) const _LeadingWidget(),
+              if (widget.title != null)
+                TextWidget(
+                  widget.title!,
+                  color: colors.onSecondary,
+                  size: TextWidgetSizes.headlineLarge,
+                ),
+              WrapWidget(
+                direction: Axis.horizontal,
+                alignment: WrapAlignment.end,
+                children: widget.actions,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -82,17 +95,13 @@ class _LeadingWidget extends StatelessWidget with ThemeMixin {
     final colors = getColors();
     final metrics = getMetrics();
 
-    late IconData icon;
-    if (Platform.isAndroid) {
-      icon = Ionicons.arrow_back_outline;
-    } else {
-      icon = Ionicons.chevron_back_outline;
-    }
+    var icon = Ionicons.arrow_back_outline;
+    if (Platform.isIOS) icon = Ionicons.chevron_back_outline;
 
     return IconButtonWidget(
       icon: icon,
       fgColor: colors.onSecondary,
-      iconSize: metrics.icon * 1.4,
+      iconSize: metrics.icon * 1.2,
       onPressed: () => Get.back<void>(),
     );
   }
