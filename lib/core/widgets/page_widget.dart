@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tabnews/core/widgets/padding_widget.dart';
+import 'package:tabnews/core/mixin/theme_mixin.dart';
 
-class PageWidget extends StatelessWidget {
+class PageWidget extends StatelessWidget with ThemeMixin {
   const PageWidget({
-    this.appBarSize = const Size.fromHeight(50),
+    this.appBarSize = const Size.fromHeight(100),
     this.appBar,
     this.body,
     this.padding,
@@ -50,6 +50,8 @@ class PageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final metrics = getMetrics();
+
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -62,8 +64,8 @@ class PageWidget extends StatelessWidget {
         appBar: appBar != null
             ? PreferredSize(preferredSize: appBarSize, child: appBar!)
             : null,
-        body: PaddingWidget(
-          padding: padding,
+        body: Padding(
+          padding: padding ?? EdgeInsets.symmetric(horizontal: metrics.medium),
           child: Visibility(
             visible: isLoading,
             replacement: body ?? child ?? const SizedBox(),
