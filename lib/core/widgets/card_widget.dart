@@ -7,6 +7,7 @@ class CardWidget extends StatelessWidget with ThemeMixin {
     required this.child,
     this.width,
     this.height,
+    this.border,
     this.padding,
     this.borderRadius,
     this.color,
@@ -16,6 +17,7 @@ class CardWidget extends StatelessWidget with ThemeMixin {
   final Widget child;
   final double? width;
   final double? height;
+  final BoxBorder? border;
   final EdgeInsets? padding;
   final BorderRadius? borderRadius;
   final Color? color;
@@ -25,22 +27,20 @@ class CardWidget extends StatelessWidget with ThemeMixin {
     final colors = getColors();
     final metrics = getMetrics();
 
-    return SizedBox(
+    return Container(
       width: width,
       height: height,
-      child: Card(
-        elevation: 0,
-        margin: EdgeInsets.zero,
+      decoration: BoxDecoration(
         color: color ?? colors.surface,
-        surfaceTintColor: colors.surface,
-        shape: RoundedRectangleBorder(
-          borderRadius: borderRadius ?? BorderRadius.all(metrics.radius),
-          side: metrics.card.haveBorder ? metrics.border : BorderSide.none,
-        ),
-        child: PaddingWidget(
-          padding: padding ?? metrics.card.padding,
-          child: child,
-        ),
+        border: border ??
+            Border.fromBorderSide(
+              metrics.card.haveBorder ? metrics.border : BorderSide.none,
+            ),
+        borderRadius: borderRadius ?? BorderRadius.all(metrics.radius),
+      ),
+      child: PaddingWidget(
+        padding: padding ?? metrics.card.padding,
+        child: child,
       ),
     );
   }
