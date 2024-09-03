@@ -23,9 +23,9 @@ class SafeAreaWidget extends StatelessWidget with ThemeMixin {
   Widget build(BuildContext context) {
     final metrics = getMetrics();
 
-    var minimum = EdgeInsets.zero;
+    var padding = EdgeInsets.zero;
     if (Platform.isAndroid) {
-      minimum = minimum.copyWith(
+      padding = padding.copyWith(
         top: top ? metrics.medium : 0,
         bottom: bottom ? metrics.medium : 0,
         left: left ? metrics.medium : 0,
@@ -38,8 +38,7 @@ class SafeAreaWidget extends StatelessWidget with ThemeMixin {
       bottom: bottom,
       left: left,
       right: right,
-      minimum: minimum,
-      child: child,
+      child: Padding(padding: padding, child: child),
     );
   }
 }
