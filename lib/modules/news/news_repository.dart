@@ -1,6 +1,16 @@
 import 'package:tabnews/core/domain/entities/news_entity.dart';
-import 'package:tabnews/modules/news/domain/news_repository.dart';
-import 'package:tabnews/modules/news/infra/news_datasource.dart';
+import 'package:tabnews/modules/news/news_datasource.dart';
+
+abstract class NewsRepository {
+  Future<NewsEntity?> getOne({
+    required String user,
+    required String slug,
+  });
+  Future<List<NewsEntity>> getComments({
+    required String user,
+    required String slug,
+  });
+}
 
 class NewsRepositoryImpl implements NewsRepository {
   const NewsRepositoryImpl({required this.datasource});

@@ -1,6 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:tabnews/core/domain/entities/news_entity.dart';
-import 'package:tabnews/modules/news/infra/news_datasource.dart';
+
+abstract class NewsDatasource {
+  Future<NewsEntity?> getOne({
+    required String user,
+    required String slug,
+  });
+  Future<List<NewsEntity>> getComments({
+    required String user,
+    required String slug,
+  });
+}
 
 class NewsDatasourceImpl implements NewsDatasource {
   const NewsDatasourceImpl({required this.dio});
@@ -30,9 +40,7 @@ class NewsDatasourceImpl implements NewsDatasource {
     final data = response.data as List<dynamic>?;
     if (data != null) {
       return data
-          .map(
-            (e) => NewsEntityMapper.fromMap(e as Map<String, dynamic>),
-          )
+          .map((e) => NewsEntityMapper.fromMap(e as Map<String, dynamic>))
           .toList();
     }
 
