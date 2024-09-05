@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:solar_icons/solar_icons.dart';
 import 'package:tabnews/core/mixin/theme_mixin.dart';
+import 'package:tabnews/core/widgets/icon_widget.dart';
+import 'package:tabnews/core/widgets/spacer_widget.dart';
+import 'package:tabnews/core/widgets/text_widget.dart';
 
 class PageWidget extends StatelessWidget with ThemeMixin {
   const PageWidget({
-    this.appBarSize = const Size.fromHeight(100),
-    this.appBar,
-    this.body,
-    this.padding,
+    this.isEmpty = false,
     this.isLoading = false,
-    this.floatingActionButton,
-    this.bottomNavigationBar,
+    this.emptyText = 'Não há conteúdo',
+    this.appBarSize = const Size.fromHeight(100),
+    this.emptyIcon = SolarIconsOutline.notesMinimalistic,
+    this.body,
     this.child,
+    this.appBar,
+    this.padding,
+    this.bottomNavigationBar,
+    this.floatingActionButton,
     super.key,
   });
 
@@ -41,19 +48,20 @@ class PageWidget extends StatelessWidget with ThemeMixin {
     );
   }
 
-  final Size appBarSize;
-  final Widget? appBar;
+  final bool isEmpty;
   final Widget? body;
+  final Widget? child;
+  final Widget? appBar;
   final bool isLoading;
+  final Size appBarSize;
+  final String emptyText;
+  final IconData emptyIcon;
   final EdgeInsets? padding;
   final Widget? floatingActionButton;
   final Widget? bottomNavigationBar;
-  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
-    final metrics = getMetrics();
-
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -66,16 +74,70 @@ class PageWidget extends StatelessWidget with ThemeMixin {
         appBar: appBar != null
             ? PreferredSize(preferredSize: appBarSize, child: appBar!)
             : null,
-        body: Padding(
-          padding: padding ?? EdgeInsets.symmetric(horizontal: metrics.medium),
-          child: Visibility(
-            visible: isLoading,
-            replacement: body ?? child ?? const SizedBox(),
-            child: const Center(child: CircularProgressIndicator.adaptive()),
+        body: Visibility(
+          visible: isEmpty == false,
+          replacement: _NoContentWidget(icon: emptyIcon, text: emptyText),
+          child: _ContentWidget(
+            body: body,
+            padding: padding,
+            isLoading: isLoading,
+            child: child,
           ),
         ),
         floatingActionButton: floatingActionButton,
         bottomNavigationBar: bottomNavigationBar,
+      ),
+    );
+  }
+}
+
+class _ContentWidget extends StatelessWidget with ThemeMixin {
+  const _ContentWidget({
+    required this.body,
+    required this.child,
+    required this.padding,
+    required this.isLoading,
+  });
+
+  final Widget? body;
+  final Widget? child;
+  final bool isLoading;
+  final EdgeInsets? padding;
+
+  @override
+  Widget build(BuildContext context) {
+    final metrics = getMetrics();
+
+    return Padding(
+      padding: padding ?? EdgeInsets.symmetric(horizontal: metrics.medium),
+      child: Visibility(
+        visible: isLoading,
+        replacement: body ?? child ?? const SizedBox(),
+        child: const Center(child: CircularProgressIndicator.adaptive()),
+      ),
+    );
+  }
+}
+
+class _NoContentWidget extends StatelessWidget {
+  const _NoContentWidget({
+    required this.icon,
+    required this.text,
+  });
+
+  final String text;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IconWidget(icon),
+          const SpacerWidget(size: SpacerWidgetSizes.small),
+          TextWidget(text),
+        ],
       ),
     );
   }
