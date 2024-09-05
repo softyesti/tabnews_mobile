@@ -12,6 +12,7 @@ class HomePageBinding implements Bindings {
   void dependencies() {
     Get
       ..lazyPut<HomeUsecases>(
+        fenix: true,
         () => HomeUsecasesImpl(
           repository: HomeRepositoryImpl(
             datasource: HomeDatasourceImpl(
@@ -20,6 +21,6 @@ class HomePageBinding implements Bindings {
           ),
         ),
       )
-      ..lazyPut(HomePageController.new);
+      ..lazyPut(HomePageController.new, fenix: true);
   }
 }
