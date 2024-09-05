@@ -16,6 +16,7 @@ class PageWidget extends StatelessWidget with ThemeMixin {
 
   factory PageWidget.sliver({
     double anchor = 0,
+    bool isLoading = false,
     List<Widget> slivers = const [],
     Widget? appBar,
     Widget? floatingActionButton,
@@ -24,6 +25,7 @@ class PageWidget extends StatelessWidget with ThemeMixin {
   }) {
     return PageWidget(
       appBar: appBar,
+      isLoading: isLoading,
       floatingActionButton: floatingActionButton,
       bottomNavigationBar: bottomNavigationBar,
       child: SafeArea(
