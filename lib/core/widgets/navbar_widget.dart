@@ -25,7 +25,10 @@ class NavBarWidget extends StatelessWidget with ThemeMixin {
 
     return BlurWidget(
       child: Container(
-        padding: EdgeInsets.only(top: metrics.small),
+        padding: EdgeInsets.symmetric(
+          vertical: metrics.small,
+          horizontal: metrics.medium,
+        ),
         color: colors.secondary,
         child: SafeAreaWidget(
           bottom: true,
@@ -112,7 +115,7 @@ class _NavBarItemWidget extends StatelessWidget with ThemeMixin {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          IconWidget(icon, color: color, size: metrics.icon * 1.2),
+          IconWidget(icon, color: color, size: metrics.icon * 1.4),
           TextWidget(item.label, size: size, color: color),
         ],
       ),
