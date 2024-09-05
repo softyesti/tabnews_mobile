@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:tabnews/core/bindings/comment_page_binding.dart';
+import 'package:tabnews/core/bindings/favorite_page_binding.dart';
 import 'package:tabnews/core/bindings/home_page_binding.dart';
 import 'package:tabnews/core/bindings/news_page_binding.dart';
 import 'package:tabnews/core/bindings/root_page_binding.dart';
@@ -17,6 +18,7 @@ abstract class AppPages {
       bindings: const [
         RootPageBinding(),
         HomePageBinding(),
+        FavoritePageBinding(),
       ],
     ),
     GetPage<void>(

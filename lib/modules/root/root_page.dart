@@ -5,6 +5,7 @@ import 'package:solar_icons/solar_icons.dart';
 import 'package:tabnews/core/widgets/button/fab_button_widget.dart';
 import 'package:tabnews/core/widgets/navbar_widget.dart';
 import 'package:tabnews/core/widgets/page_widget.dart';
+import 'package:tabnews/modules/favorite/presentation/favorite_page.dart';
 import 'package:tabnews/modules/home/presentation/home_page.dart';
 import 'package:tabnews/modules/root/root_page_controller.dart';
 
@@ -18,9 +19,12 @@ class RootPage extends GetView<RootPageController> {
       body: PageView(
         controller: controller.pageController,
         onPageChanged: (value) => controller.current = value,
-        children: const [HomePage()],
+        children: const [HomePage(), FavoritePage()],
       ),
-      floatingActionButton: const FabButtonWidget(icon: Ionicons.add_outline),
+      floatingActionButton: Obx(() {
+        if (controller.current != 0) return const SizedBox.shrink();
+        return const FabButtonWidget(icon: Ionicons.add_outline);
+      }),
       bottomNavigationBar: const _NavBarWidget(),
     );
   }
@@ -40,6 +44,11 @@ class _NavBarWidget extends GetView<RootPageController> {
             label: 'Início',
             icon: SolarIconsOutline.home,
             activeIcon: SolarIconsBold.home,
+          ),
+          NavBarWidgetItem(
+            label: 'Favoritos',
+            icon: SolarIconsOutline.stars1,
+            activeIcon: SolarIconsBold.stars1,
           ),
         ],
       ),

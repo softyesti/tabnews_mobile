@@ -1,4 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:tabnews/core/domain/hooks.dart';
 
 part 'news_entity.mapper.dart';
 
@@ -42,14 +43,4 @@ class NewsEntity with NewsEntityMappable {
 
   final String? title;
   final String? body;
-}
-
-class NullToListHook extends MappingHook {
-  const NullToListHook();
-
-  @override
-  Object? beforeDecode(Object? value) {
-    if (value == null) return super.beforeDecode([]);
-    return super.beforeDecode(value);
-  }
 }
