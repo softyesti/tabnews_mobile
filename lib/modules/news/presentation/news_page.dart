@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:solar_icons/solar_icons.dart';
 import 'package:tabnews/core/domain/entities/news_entity.dart';
 import 'package:tabnews/core/mixin/theme_mixin.dart';
 import 'package:tabnews/core/routes/app_routes.dart';
 import 'package:tabnews/core/widgets/appbar_widget.dart';
 import 'package:tabnews/core/widgets/button/fab_button_widget.dart';
+import 'package:tabnews/core/widgets/button/icon_button_widget.dart';
 import 'package:tabnews/core/widgets/cards/detailed_news_card_widget.dart';
 import 'package:tabnews/core/widgets/page_widget.dart';
 import 'package:tabnews/core/widgets/spacer_widget.dart';
@@ -25,12 +27,13 @@ class NewsPage extends GetView<NewsPageController> {
       final news = controller.news;
       final replies = controller.comments;
       final isLoading = controller.isLoading;
+      final isFavorite = controller.isFavorite;
 
       return PageWidget.sliver(
         isLoading: isLoading,
         scrollController: scrollController,
-        appBar: AppBarWidget(
-          showLeading: true,
+        appBar: _AppBarWidget(
+          isFavorite: isFavorite,
           scrollController: scrollController,
         ),
         floatingActionButton: _FabButtonsWidget(
@@ -46,6 +49,40 @@ class NewsPage extends GetView<NewsPageController> {
         ],
       );
     });
+  }
+}
+
+class _AppBarWidget extends GetView<NewsPageController> with ThemeMixin {
+  const _AppBarWidget({
+    required this.isFavorite,
+    required this.scrollController,
+  });
+
+  final bool isFavorite;
+  final ScrollController scrollController;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = getColors();
+
+    var color = colors.onSecondary;
+    var icon = SolarIconsOutline.start1;
+    if (isFavorite) {
+      color = colors.primary;
+      icon = SolarIconsBold.start1;
+    }
+
+    return AppBarWidget(
+      showLeading: true,
+      scrollController: scrollController,
+      actions: [
+        IconButtonWidget(
+          icon: icon,
+          fgColor: color,
+          onPressed: () async => controller.favorite(),
+        ),
+      ],
+    );
   }
 }
 
