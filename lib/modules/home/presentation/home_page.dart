@@ -20,9 +20,11 @@ class HomePage extends GetView<HomePageController> with DialogMixin {
 
     return Obx(() {
       final news = controller.news;
+      final filter = controller.filter;
+      final isLoading = controller.isLoading;
 
       return PageWidget(
-        isLoading: controller.isLoading,
+        isLoading: isLoading,
         appBar: AppBarWidget(
           title: 'TabNews',
           scrollController: scrollController,
@@ -32,7 +34,7 @@ class HomePage extends GetView<HomePageController> with DialogMixin {
               onPressed: () async => openBottomSheet(
                 name: 'news_filter',
                 child: FilterBottomSheetWidget(
-                  selected: controller.filter,
+                  selected: filter,
                   onSelected: (value) async => controller.setFilter(value),
                 ),
               ),
@@ -45,12 +47,18 @@ class HomePage extends GetView<HomePageController> with DialogMixin {
           separatorBuilder: (_, __) => const SpacerWidget(),
           itemBuilder: (_, index) {
             final item = news[index];
+            final params = {
+              'id': item.id,
+              'user': item.ownerUsername,
+              'slug': item.slug,
+            };
+
             return CompactNewsCardWidget(
               news: item,
               index: index + 1,
               onPressed: () => Get.toNamed<void>(
                 AppRoutes.news,
-                parameters: {'user': item.ownerUsername, 'slug': item.slug},
+                parameters: params,
               ),
             );
           },
