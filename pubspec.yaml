@@ -1,9 +1,7 @@
 name: tabnews
 description: A new Flutter project.
-
 publish_to: "none"
 repository: https://github.com/softyesti/tabnews_client
-
 version: 0.0.1+1
 
 environment:
@@ -24,6 +22,8 @@ dependencies:
   markdown: ^7.2.1
   feather_icons: ^1.2.0
   solar_icons: ^0.0.5
+  hive: ^2.2.3
+  path_provider: ^2.1.4
 
 dev_dependencies:
   flutter_test:
