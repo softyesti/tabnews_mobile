@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:tabnews/core/domain/entities/news_entity.dart';
 import 'package:tabnews/core/mixin/datetime_mixin.dart';
 import 'package:tabnews/core/mixin/theme_mixin.dart';
 import 'package:tabnews/core/widgets/text_widget.dart';
 
 class HeaderWidget extends StatelessWidget with ThemeMixin, DateTimeMixin {
-  const HeaderWidget({required this.news, super.key});
+  const HeaderWidget({
+    required this.user,
+    required this.publishedAt,
+    super.key,
+  });
 
-  final NewsEntity news;
+  final String user;
+  final DateTime publishedAt;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +20,9 @@ class HeaderWidget extends StatelessWidget with ThemeMixin, DateTimeMixin {
 
     return Row(
       children: [
-        TextWidget(news.ownerUsername, color: colors.primary),
+        TextWidget(user, color: colors.primary),
         TextWidget(' • ', color: fgColor),
-        TextWidget(getRelativeTime(news.publishedAt), color: fgColor),
+        TextWidget(getRelativeTime(publishedAt), color: fgColor),
       ],
     );
   }

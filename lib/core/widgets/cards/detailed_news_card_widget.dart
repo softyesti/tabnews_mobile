@@ -33,7 +33,10 @@ class DetailedNewsCardWidget extends StatelessWidget
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        HeaderWidget(news: news),
+        HeaderWidget(
+          user: news.ownerUsername,
+          publishedAt: news.publishedAt,
+        ),
         const SpacerWidget(size: SpacerWidgetSizes.small),
         CardWidget(
           width: double.infinity,
