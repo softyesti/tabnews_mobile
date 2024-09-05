@@ -58,8 +58,10 @@ class _AppBarWidgetState extends State<AppBarWidget> with ThemeMixin {
     return BlurWidget(
       isEnabled: isBlurEnabled,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: metrics.medium)
-            .copyWith(bottom: metrics.small),
+        padding: EdgeInsets.symmetric(
+          vertical: metrics.small,
+          horizontal: metrics.medium,
+        ),
         color: colors.secondary,
         child: SafeAreaWidget(
           top: true,
