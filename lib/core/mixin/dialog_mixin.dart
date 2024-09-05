@@ -10,10 +10,13 @@ mixin DialogMixin {
   }) async {
     final metrics = Get.context!.theme.extension<ThemeMetrics>()!;
 
+    final milliseconds = metrics.duration.inMilliseconds / 2;
+    final duration = Duration(milliseconds: milliseconds.toInt());
+
     await Get.bottomSheet<void>(
       BottomSheetWidget(child: child),
-      exitBottomSheetDuration: metrics.duration,
-      enterBottomSheetDuration: metrics.duration,
+      exitBottomSheetDuration: duration,
+      enterBottomSheetDuration: duration,
       settings: RouteSettings(name: '${name}_bottom_sheet'),
     );
   }
