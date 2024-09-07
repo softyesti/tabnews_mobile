@@ -77,6 +77,10 @@ class _AppBarWidget extends GetView<NewsPageController> with ThemeMixin {
       scrollController: scrollController,
       actions: [
         IconButtonWidget(
+          icon: SolarIconsOutline.share,
+          onPressed: () async => controller.share(),
+        ),
+        IconButtonWidget(
           icon: icon,
           fgColor: color,
           onPressed: () async => controller.favorite(),

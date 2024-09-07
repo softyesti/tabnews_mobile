@@ -1,11 +1,12 @@
 import 'package:get/get.dart';
 import 'package:tabnews/core/domain/entities/favorite_entity.dart';
 import 'package:tabnews/core/domain/entities/news_entity.dart';
+import 'package:tabnews/core/mixin/dialog_mixin.dart';
 import 'package:tabnews/modules/favorite/favorite_usecases.dart';
 import 'package:tabnews/modules/favorite/presentation/favorite_page_controller.dart';
 import 'package:tabnews/modules/news/news_usecases.dart';
 
-class NewsPageController extends GetxController {
+class NewsPageController extends GetxController with DialogMixin {
   final _newsUsecases = Get.find<NewsUsecases>();
   final _favoriteUsecases = Get.find<FavoriteUsecases>();
 
@@ -66,5 +67,14 @@ class NewsPageController extends GetxController {
     _isFavorite.value = exists;
 
     await _favoritePageController.load();
+  }
+
+  Future<void> share() async {
+    if (_news.value == null) return;
+
+    final news = _news.value!;
+    final path = '${news.ownerUsername}/${news.slug}';
+    final uri = Uri.https('tabnews.com.br', path);
+    await openShareDialog(uri: uri);
   }
 }
