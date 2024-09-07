@@ -21,9 +21,9 @@ Veja as dependências do projeto em: [pubspec.yaml](https://github.com/softyesti
 * Visualização de posts
 * Compartilhamento de posts
 * Visualização de comentários
-* Adição e remoção posts favoritos
 * Contagem de tabcoins e comentários
-* Filtragem por antigos, recentes e relevantes
+* Adição e remoção de posts favoritos
+* Filtragem de posts antigos, recentes ou relevantes
 
 ## TabNews API
 
