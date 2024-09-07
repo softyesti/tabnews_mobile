@@ -115,7 +115,7 @@ class _NavBarItemWidget extends StatelessWidget with ThemeMixin {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          IconWidget(icon, color: color, size: metrics.icon * 1.4),
+          IconWidget(icon, color: color, size: metrics.icon * 1.1),
           TextWidget(item.label, size: size, color: color),
         ],
       ),
