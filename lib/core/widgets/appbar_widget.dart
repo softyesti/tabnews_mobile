@@ -55,13 +55,18 @@ class _AppBarWidgetState extends State<AppBarWidget> with ThemeMixin {
     final colors = getColors();
     final metrics = getMetrics();
 
+    var padding = EdgeInsets.all(metrics.medium);
+    if (Platform.isIOS) {
+      padding = EdgeInsets.symmetric(
+        vertical: metrics.small,
+        horizontal: metrics.medium,
+      ).copyWith(bottom: metrics.medium);
+    }
+
     return BlurWidget(
       isEnabled: isBlurEnabled,
       child: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: metrics.small,
-          horizontal: metrics.medium,
-        ),
+        padding: padding,
         color: colors.secondary,
         child: SafeAreaWidget(
           top: true,
@@ -102,8 +107,8 @@ class _LeadingWidget extends StatelessWidget with ThemeMixin {
 
     return IconButtonWidget(
       icon: icon,
+      iconSize: metrics.icon,
       fgColor: colors.onSecondary,
-      iconSize: metrics.icon * 1.2,
       onPressed: () => Get.back<void>(),
     );
   }
