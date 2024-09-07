@@ -4,17 +4,26 @@ Cliente mobile construído em Flutter para visualizar e interagir com as notíci
 
 ## Tecnologias
 
-* Flutter
 * Dart
+* Flutter
+* GetX
 * Make
 
 Veja as dependências do projeto em: [pubspec.yaml](https://github.com/softyesti/tabnews_client/blob/main/pubspec.yaml)
 
 ## Plataformas
 
-* Android 4.4+
 * IOS 12+
-* Web(interface mobile)
+* Android 5.0+
+
+## Recursos
+
+* Visualização de posts
+* Compartilhamento de posts
+* Visualização de comentários
+* Adição e remoção posts favoritos
+* Contagem de tabcoins e comentários
+* Filtragem por antigos, recentes e relevantes
 
 ## TabNews API
 
