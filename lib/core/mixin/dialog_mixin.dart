@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:tabnews/core/theme/extensions/theme_metrics_extension.dart';
 import 'package:tabnews/core/widgets/bottomsheet_widget.dart';
 
@@ -19,5 +20,21 @@ mixin DialogMixin {
       enterBottomSheetDuration: duration,
       settings: RouteSettings(name: '${name}_bottom_sheet'),
     );
+  }
+
+  Future<void> openShareDialog({
+    Uri? uri,
+    String? text,
+    List<XFile>? files,
+  }) async {
+    final context = Get.context!;
+    final box = context.findRenderObject()! as RenderBox;
+    final origin = box.localToGlobal(Offset.zero) & box.size;
+
+    if (text != null) await Share.share(text, sharePositionOrigin: origin);
+    if (uri != null) await Share.shareUri(uri, sharePositionOrigin: origin);
+    if (files != null) {
+      await Share.shareXFiles(files, text: text, sharePositionOrigin: origin);
+    }
   }
 }
