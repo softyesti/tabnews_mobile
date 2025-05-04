@@ -1,51 +1,73 @@
+<img width="100" height="100" src="assets/icon.png" alt="app logo">
+
 # TabNews Client
 
-Cliente mobile construído em Flutter para visualizar e interagir com as notícias/artigos publicados no [TabNews](https://tabnews.com.br).
+Cliente mobile construído em Flutter para visualizar e interagir com as
+notícias/artigos publicados no [TabNews](https://tabnews.com.br).
 
-## Tecnologias
+## 🧑‍💻 Tecnologias
+
+[![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
 
 * Dart
 * Flutter
-* GetX
-* Make
 
-Veja as dependências do projeto em: [pubspec.yaml](https://github.com/softyesti/tabnews_client/blob/main/pubspec.yaml)
+Veja as dependências do projeto em: [pubspec.yaml](./pubspec.yaml)
 
-## Plataformas
+## 🖥️ Plataformas
 
-* IOS 12+
-* Android 5.0+
+* IOS(12+) ✅
+* Android(5.1+|SDK22+) ✅
 
-## Recursos
+## 🧰 Recursos
 
 * Visualização de posts
 * Compartilhamento de posts
 * Visualização de comentários
 * Contagem de tabcoins e comentários
 * Adição e remoção de posts favoritos
-* Filtragem de posts antigos, recentes ou relevantes
+* Filtragem por posts antigos, recentes ou relevantes
 
-## TabNews API
+## 🌐 TabNews API
 
-Esta aplicação se baseia na versão v1 da api, disponível através da rota: [https://tabnews.com.br/v1](https://tabnews.com.br/v1) e descrita na documentação não oficial: [https://coffee-is-power.github.io/tabnews-openapi/](https://coffee-is-power.github.io/tabnews-openapi/)
+Esta aplicação é baseada na versão 1 da api, disponível através da rota:
+[https://tabnews.com.br/v1](https://tabnews.com.br/v1) e descrita na
+documentação não oficial: [https://coffee-is-power.github.io/tabnews-openapi/](https://coffee-is-power.github.io/tabnews-openapi/).
 
-## Imagens
+## ⚠️ Aviso Importante
+
+Este projeto não é afiliado, associado, autorizado, endossado por, ou de
+qualquer forma oficialmente conectado ao TabNews ou a qualquer uma de
+suas subsidiárias ou afiliadas. O site oficial do TabNews pode ser encontrado em
+[https://tabnews.com.br](https://tabnews.com.br). "TabNews", bem como nomes,
+marcas, emblemas e imagens relacionados, são marcas registradas de seus
+respectivos proprietários.
+
+## 📷 Imagens
 
 <table>
   <tr>
     <td>
-      <img src="image/README/1709151624959.png" alt="" width="260px" />
+      <img src="readme/artigos.jpg" alt="" width="260px" />
     </td>
     <td>
-      <img src="image/README/1709151645633.png" alt="" width="260px" />
+      <img src="readme/filtros.jpg" alt="" width="260px" />
     </td>
     <td>
-      <img src="image/README/1709151652453.png" alt="" width="260px" />
+      <img src="readme/artigo.jpg" alt="" width="260px" />
     </td>
   </tr>
   <tr>
     <td>
-      <img src="image/README/1709151657361.png" alt="" width="260px" />
+      <img src="readme/respostas.jpg" alt="" width="260px" />
+    </td>
+    <td>
+      <img src="readme/favoritos.jpg" alt="" width="260px" />
     </td>
   </tr>
 </table>
+
+## 📜 Credits
+
+* SoftYes TI [\<softyes.com.br\>](https://softyes.com.br)
+* João Sereia [\<joao.sereia@softyes.com.br\>](mailto:joao.sereia@softyes.com.br)
