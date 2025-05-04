@@ -1,3 +1,5 @@
+.PHONY: icons splash runner upgrade clean
+
 icons:
 	@echo "Generating launcher icons"
 	@flutter pub run flutter_launcher_icons

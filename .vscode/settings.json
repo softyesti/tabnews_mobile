@@ -11,10 +11,12 @@
     "fenix",
     "Getx",
     "ionicons",
+    "kotlin",
     "lerp",
     "pubspec",
     "RGBO",
     "softuiux",
+    "softyes",
     "strikethrough",
     "tabcoins",
     "tabnews",
@@ -24,5 +26,6 @@
   ],
   "java.compile.nullAnalysis.mode": "automatic",
   "java.configuration.updateBuildConfiguration": "automatic",
-  "makefile.configureOnOpen": false
+  "makefile.configureOnOpen": false,
+  "dart.flutterSdkPath": ".fvm/versions/stable"
 }
