@@ -21,6 +21,7 @@ Veja as dependências do projeto em: [pubspec.yaml](./pubspec.yaml)
 
 ## 🧰 Recursos
 
+* Temas claro e escuro
 * Visualização de posts
 * Compartilhamento de posts
 * Visualização de comentários

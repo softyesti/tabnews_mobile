@@ -5,7 +5,7 @@ publish_to: "none"
 homepage: https://softyes.com.br
 repository: https://github.com/softyesti/tabnews_client
 
-version: 0.3.0+2
+version: 0.3.0+3
 
 environment:
   sdk: ^3.7.2
